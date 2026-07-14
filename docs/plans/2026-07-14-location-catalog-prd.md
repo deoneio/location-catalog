@@ -65,7 +65,3 @@ The goal of this project is to build a premium, highly aesthetic catalog website
 - **Premium Feel**: Avoid generic templates. Incorporate the brand guidelines into a premium, highly aesthetic modern design.
 - **Animations**: Smooth page transitions, fade-ins on scroll, and interactive hover effects on location cards to make the interface feel alive and responsive.
 - **Responsive**: Flawless experience on mobile, tablet, and desktop devices.
-
-## 7. Future Considerations (Out of Scope for v1)
-- Integrated booking and availability calendar system.
-- User accounts and saved locations (favorites).
