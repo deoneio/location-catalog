@@ -38,6 +38,25 @@ npx directus schema apply ./schema.yaml
 **What happens?**
 Directus will compare the target database with your `schema.yaml` file. It will automatically create missing collections, add new fields, and update relationships to ensure the production database perfectly matches your local schema.
 
+## Applying Snapshots in Docker (Production)
+
+If you are running Directus via Docker in production, you cannot run `npx directus` directly on your host server. Instead, you need to run the command inside the Docker container. 
+
+Assuming your `schema.yaml` is mounted or copied into the container (and your container is named `directus`), you can apply the schema by executing the command inside the running container:
+
+```bash
+# Dry run
+docker exec -it directus npx directus schema apply ./schema.yaml --dry-run
+
+# Apply for real
+docker exec -it directus npx directus schema apply ./schema.yaml
+```
+
+*Note: If you use Docker Compose, the command looks like this:*
+```bash
+docker compose exec directus npx directus schema apply ./schema.yaml
+```
+
 ## Workflow Summary
 1. **Local:** Build your schema in the Directus UI.
 2. **Local:** Run `npx directus schema snapshot ./schema.yaml`.
