@@ -82,4 +82,5 @@ Before saying a task is done:
 1. **Aesthetics are Critical:** The client demands a premium, modern, dynamic design. Do not produce generic minimal-viable UI. Use glassmorphism, modern typography (Inter/Roboto/Outfit), subtle micro-animations, and curated HSL palettes.
 2. **CSS Rule:** Use exclusively Vanilla CSS. Do NOT use Tailwind unless explicitly asked by the user in the future.
 3. **Mock Data:** Whenever building frontend components that fetch data, ensure it seamlessly works with the mock routes at `/api/items/...`.
-4. **Current Status:** Foundation is fully set. Next phase is building the global layouts (Navbar/Footer) and the frontend pages using the mock API.
+4. **Vue SFC Structure:** Keep the `.vue` files clean. Place JS/TS logic in dedicated files under `app/scripts/pages/` (e.g. `<script setup src="~/scripts/pages/index.js"></script>`) and keep CSS merged inside the `.vue` file using `<style scoped>`.
+5. **Current Status:** Foundation is fully set. Next phase is building the global layouts (Navbar/Footer) and the frontend pages using the mock API.
