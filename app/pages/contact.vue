@@ -5,9 +5,7 @@
   </div>
 </template>
 
-<script setup>
-// Script logic goes here
-</script>
+<script setup src="~/scripts/pages/contact.js"></script>
 
 <style scoped>
 /* Scoped styles go here */

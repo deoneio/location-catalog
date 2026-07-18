@@ -6,9 +6,7 @@
   </div>
 </template>
 
-<script setup>
-// Script logic goes here
-</script>
+<script setup src="~/scripts/pages/catalog/[slug].js"></script>
 
 <style scoped>
 /* Scoped styles go here */
