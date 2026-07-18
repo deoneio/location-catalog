@@ -122,3 +122,7 @@ dist
 
 # Mac OS DS_Store
 .DS_Store
+
+# Worktrees
+.worktrees/
+worktrees/
