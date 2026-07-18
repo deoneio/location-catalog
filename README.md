@@ -2,6 +2,14 @@
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+## Prerequisites
+
+Before setting up the project, ensure you have the following installed on your machine:
+
+- **Node.js**: v18.0.0 or newer (v20+ recommended)
+- **Git**: For version control
+- **Package Manager**: npm (v9+), pnpm, yarn, or bun
+
 ## Available Routes
 
 The application uses file-based routing. The following placeholder pages are currently available:
