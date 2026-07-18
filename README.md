@@ -107,3 +107,13 @@ bun run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Recommended VS Code Extensions
+
+For the best development experience with this project stack, install the following VS Code extensions:
+
+1. **Vue - Official** (`Vue.volar`): Essential for Vue 3 SFC syntax highlighting and TypeScript support. (Note: Disable the built-in TypeScript extension for Vue workspaces or use Volar's Takeover mode).
+2. **Nuxtr** (`nuxtr.nuxtr-vscode`): Deep integration with Nuxt 3, providing snippets, auto-completion, and handy commands.
+3. **ESLint** (`dbaeumer.vscode-eslint`): For JavaScript/TypeScript linting and formatting.
+4. **Prettier** (`esbenp.prettier-vscode`): For consistent code formatting.
+5. **SQLite Viewer** (`qwtel.sqlite-viewer`): Very useful for viewing and debugging the local Directus database (`scripts/directus-schema/database/data.db`) directly in your editor.
