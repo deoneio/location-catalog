@@ -1,0 +1,514 @@
+version: 1
+directus: "11.1.0"
+vendor: "postgres"
+collections:
+  - collection: locations
+    meta:
+      collection: locations
+      icon: location_on
+      hidden: false
+      singleton: false
+      archive_field: status
+      archive_app_filter: true
+      archive_value: archived
+      unarchive_value: draft
+    schema:
+      name: locations
+  - collection: locations_files
+    meta:
+      collection: locations_files
+      icon: import_export
+      hidden: true
+      singleton: false
+    schema:
+      name: locations_files
+  - collection: testimonials
+    meta:
+      collection: testimonials
+      icon: format_quote
+      hidden: false
+      singleton: false
+      archive_field: status
+      archive_app_filter: true
+      archive_value: archived
+      unarchive_value: draft
+    schema:
+      name: testimonials
+  - collection: testimonials_files
+    meta:
+      collection: testimonials_files
+      icon: import_export
+      hidden: true
+      singleton: false
+    schema:
+      name: testimonials_files
+  - collection: homepage_config
+    meta:
+      collection: homepage_config
+      icon: home
+      hidden: false
+      singleton: true
+    schema:
+      name: homepage_config
+fields:
+  - collection: locations
+    field: id
+    type: uuid
+    meta:
+      interface: input
+      readonly: true
+      hidden: true
+      special:
+        - uuid
+    schema:
+      name: id
+      type: uuid
+      is_primary_key: true
+      has_auto_increment: false
+  - collection: locations
+    field: status
+    type: string
+    meta:
+      interface: select-dropdown
+      options:
+        choices:
+          - text: Published
+            value: published
+          - text: Draft
+            value: draft
+          - text: Archived
+            value: archived
+      default_value: draft
+    schema:
+      name: status
+      type: varchar
+      max_length: 255
+      default_value: draft
+  - collection: locations
+    field: name
+    type: string
+    meta:
+      interface: input
+    schema:
+      name: name
+      type: varchar
+      max_length: 255
+      is_nullable: false
+  - collection: locations
+    field: slug
+    type: string
+    meta:
+      interface: input
+    schema:
+      name: slug
+      type: varchar
+      max_length: 255
+      is_unique: true
+  - collection: locations
+    field: description
+    type: text
+    meta:
+      interface: input-wysiwyg
+    schema:
+      name: description
+      type: text
+  - collection: locations
+    field: aesthetic_style
+    type: string
+    meta:
+      interface: input
+    schema:
+      name: aesthetic_style
+      type: varchar
+      max_length: 255
+  - collection: locations
+    field: capacity
+    type: integer
+    meta:
+      interface: input
+    schema:
+      name: capacity
+      type: integer
+  - collection: locations
+    field: is_featured
+    type: boolean
+    meta:
+      interface: boolean
+    schema:
+      name: is_featured
+      type: boolean
+      default_value: false
+  - collection: locations
+    field: thumbnail
+    type: uuid
+    meta:
+      interface: file-image
+    schema:
+      name: thumbnail
+      type: uuid
+  - collection: locations
+    field: key_features
+    type: text
+    meta:
+      interface: input-wysiwyg
+    schema:
+      name: key_features
+      type: text
+  - collection: locations
+    field: rules_restrictions
+    type: text
+    meta:
+      interface: input-wysiwyg
+    schema:
+      name: rules_restrictions
+      type: text
+  - collection: locations
+    field: seo_title
+    type: string
+    meta:
+      interface: input
+    schema:
+      name: seo_title
+      type: varchar
+      max_length: 255
+  - collection: locations
+    field: seo_description
+    type: text
+    meta:
+      interface: input-multiline
+    schema:
+      name: seo_description
+      type: text
+  - collection: locations
+    field: seo_image
+    type: uuid
+    meta:
+      interface: file-image
+    schema:
+      name: seo_image
+      type: uuid
+
+  # locations_files junction
+  - collection: locations_files
+    field: id
+    type: integer
+    meta:
+      hidden: true
+    schema:
+      name: id
+      type: integer
+      is_primary_key: true
+      has_auto_increment: true
+  - collection: locations_files
+    field: locations_id
+    type: uuid
+    meta:
+      hidden: true
+    schema:
+      name: locations_id
+      type: uuid
+  - collection: locations_files
+    field: directus_files_id
+    type: uuid
+    meta:
+      hidden: true
+    schema:
+      name: directus_files_id
+      type: uuid
+  - collection: locations
+    field: gallery
+    type: alias
+    meta:
+      interface: list-m2m
+      special:
+        - m2m
+    schema: null
+
+  # testimonials
+  - collection: testimonials
+    field: id
+    type: uuid
+    meta:
+      interface: input
+      readonly: true
+      hidden: true
+      special:
+        - uuid
+    schema:
+      name: id
+      type: uuid
+      is_primary_key: true
+  - collection: testimonials
+    field: status
+    type: string
+    meta:
+      interface: select-dropdown
+      options:
+        choices:
+          - text: Published
+            value: published
+          - text: Draft
+            value: draft
+          - text: Archived
+            value: archived
+      default_value: draft
+    schema:
+      name: status
+      type: varchar
+      max_length: 255
+      default_value: draft
+  - collection: testimonials
+    field: client_name
+    type: string
+    meta:
+      interface: input
+    schema:
+      name: client_name
+      type: varchar
+      max_length: 255
+  - collection: testimonials
+    field: company
+    type: string
+    meta:
+      interface: input
+    schema:
+      name: company
+      type: varchar
+      max_length: 255
+  - collection: testimonials
+    field: feedback
+    type: text
+    meta:
+      interface: input-wysiwyg
+    schema:
+      name: feedback
+      type: text
+  - collection: testimonials
+    field: location_id
+    type: uuid
+    meta:
+      interface: select-dropdown-m2o
+    schema:
+      name: location_id
+      type: uuid
+      is_nullable: true
+
+  # testimonials_files junction
+  - collection: testimonials_files
+    field: id
+    type: integer
+    meta:
+      hidden: true
+    schema:
+      name: id
+      type: integer
+      is_primary_key: true
+      has_auto_increment: true
+  - collection: testimonials_files
+    field: testimonials_id
+    type: uuid
+    meta:
+      hidden: true
+    schema:
+      name: testimonials_id
+      type: uuid
+  - collection: testimonials_files
+    field: directus_files_id
+    type: uuid
+    meta:
+      hidden: true
+    schema:
+      name: directus_files_id
+      type: uuid
+  - collection: testimonials
+    field: bts_photos
+    type: alias
+    meta:
+      interface: list-m2m
+      special:
+        - m2m
+    schema: null
+
+  # homepage_config
+  - collection: homepage_config
+    field: id
+    type: integer
+    meta:
+      hidden: true
+    schema:
+      name: id
+      type: integer
+      is_primary_key: true
+  - collection: homepage_config
+    field: hero_media
+    type: uuid
+    meta:
+      interface: file-image
+    schema:
+      name: hero_media
+      type: uuid
+  - collection: homepage_config
+    field: hero_cta_text
+    type: string
+    meta:
+      interface: input
+    schema:
+      name: hero_cta_text
+      type: varchar
+      max_length: 255
+  - collection: homepage_config
+    field: value_proposition
+    type: text
+    meta:
+      interface: input-wysiwyg
+    schema:
+      name: value_proposition
+      type: text
+  - collection: homepage_config
+    field: seo_title
+    type: string
+    meta:
+      interface: input
+    schema:
+      name: seo_title
+      type: varchar
+      max_length: 255
+  - collection: homepage_config
+    field: seo_description
+    type: text
+    meta:
+      interface: input-multiline
+    schema:
+      name: seo_description
+      type: text
+  - collection: homepage_config
+    field: seo_image
+    type: uuid
+    meta:
+      interface: file-image
+    schema:
+      name: seo_image
+      type: uuid
+
+relations:
+  - collection: locations
+    field: thumbnail
+    related_collection: directus_files
+    schema:
+      table: locations
+      column: thumbnail
+      foreign_key_table: directus_files
+      foreign_key_column: id
+    meta:
+      many_collection: locations
+      many_field: thumbnail
+      one_collection: directus_files
+      one_field: null
+  - collection: locations
+    field: seo_image
+    related_collection: directus_files
+    schema:
+      table: locations
+      column: seo_image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+    meta:
+      many_collection: locations
+      many_field: seo_image
+      one_collection: directus_files
+      one_field: null
+  - collection: locations_files
+    field: locations_id
+    related_collection: locations
+    schema:
+      table: locations_files
+      column: locations_id
+      foreign_key_table: locations
+      foreign_key_column: id
+    meta:
+      many_collection: locations_files
+      many_field: locations_id
+      one_collection: locations
+      one_field: gallery
+      junction_field: directus_files_id
+  - collection: locations_files
+    field: directus_files_id
+    related_collection: directus_files
+    schema:
+      table: locations_files
+      column: directus_files_id
+      foreign_key_table: directus_files
+      foreign_key_column: id
+    meta:
+      many_collection: locations_files
+      many_field: directus_files_id
+      one_collection: directus_files
+      one_field: null
+      junction_field: locations_id
+  - collection: testimonials
+    field: location_id
+    related_collection: locations
+    schema:
+      table: testimonials
+      column: location_id
+      foreign_key_table: locations
+      foreign_key_column: id
+    meta:
+      many_collection: testimonials
+      many_field: location_id
+      one_collection: locations
+      one_field: null
+  - collection: testimonials_files
+    field: testimonials_id
+    related_collection: testimonials
+    schema:
+      table: testimonials_files
+      column: testimonials_id
+      foreign_key_table: testimonials
+      foreign_key_column: id
+    meta:
+      many_collection: testimonials_files
+      many_field: testimonials_id
+      one_collection: testimonials
+      one_field: bts_photos
+      junction_field: directus_files_id
+  - collection: testimonials_files
+    field: directus_files_id
+    related_collection: directus_files
+    schema:
+      table: testimonials_files
+      column: directus_files_id
+      foreign_key_table: directus_files
+      foreign_key_column: id
+    meta:
+      many_collection: testimonials_files
+      many_field: directus_files_id
+      one_collection: directus_files
+      one_field: null
+      junction_field: testimonials_id
+  - collection: homepage_config
+    field: hero_media
+    related_collection: directus_files
+    schema:
+      table: homepage_config
+      column: hero_media
+      foreign_key_table: directus_files
+      foreign_key_column: id
+    meta:
+      many_collection: homepage_config
+      many_field: hero_media
+      one_collection: directus_files
+      one_field: null
+  - collection: homepage_config
+    field: seo_image
+    related_collection: directus_files
+    schema:
+      table: homepage_config
+      column: seo_image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+    meta:
+      many_collection: homepage_config
+      many_field: seo_image
+      one_collection: directus_files
+      one_field: null
