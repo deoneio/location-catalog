@@ -1,6 +1,6 @@
 version: 1
 directus: "11.1.0"
-vendor: "postgres"
+vendor: "sqlite3"
 collections:
   - collection: locations
     meta:
