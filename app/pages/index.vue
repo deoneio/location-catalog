@@ -4,3 +4,11 @@
     <p>This is a placeholder for the Homepage.</p>
   </div>
 </template>
+
+<script setup>
+// Script logic goes here
+</script>
+
+<style scoped>
+/* Scoped styles go here */
+</style>
