@@ -1,0 +1,13 @@
+{
+  "name": "directus-schema-setup",
+  "version": "1.0.0",
+  "description": "Script to setup Directus schema",
+  "type": "module",
+  "scripts": {
+    "start": "node setup.js"
+  },
+  "dependencies": {
+    "@directus/sdk": "^16.0.0",
+    "dotenv": "^16.4.5"
+  }
+}
