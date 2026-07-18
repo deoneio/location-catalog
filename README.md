@@ -1,6 +1,16 @@
-# Nuxt Minimal Starter
+# Location Catalog (ShareLoc)
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+
+## Available Routes
+
+The application uses file-based routing. The following placeholder pages are currently available:
+
+- `/` - Homepage
+- `/catalog` - Catalog / Listing Page
+- `/catalog/[slug]` - Location Detail Page (e.g. `/catalog/industrial-loft`)
+- `/testimonials` - Testimonials Page
+- `/contact` - Contact Us Page
 
 ## Setup
 
