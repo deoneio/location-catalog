@@ -25,6 +25,10 @@ cp .env.example .env
 ### 1. Using the Mock API (Default)
 By default, the `.env` contains `USE_MOCK=true`. In this mode, Nuxt will serve hardcoded mock data for locations and testimonials via its internal server routes (`/server/api/items/...`).
 
+**To add or update mock data:**
+- Open `server/api/items/locations.get.ts` to add, edit, or remove mocked locations. The data structure mimics the Directus schema response.
+- Open `server/api/items/testimonials.get.ts` to add or edit testimonials.
+
 ### 2. Using the Real Directus API
 To connect to your real Directus instance, update your `.env` file:
 - Set `USE_MOCK=false` (or remove the line entirely)
