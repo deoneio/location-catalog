@@ -1,1 +1,3 @@
-// Global app script logic
+export function useApp() {
+  return {}
+}
