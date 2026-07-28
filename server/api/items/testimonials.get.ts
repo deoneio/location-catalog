@@ -4,29 +4,29 @@ export default defineEventHandler(() => {
       {
         id: 1,
         status: 'published',
-        author_name: 'Jane Doe',
-        author_title: 'Creative Director',
-        content: 'ShareLoc made finding the perfect industrial space so easy! The booking process was seamless.',
-        rating: 5,
-        location: 1
+        client_name: 'Jane Doe',
+        company: 'Bright Frame Productions',
+        feedback: 'ShareLoc made finding the perfect industrial space so easy! The booking process was seamless.',
+        location_id: 1,
+        bts_photos: ['mock-image-id-bts-1', 'mock-image-id-bts-2']
       },
       {
         id: 2,
         status: 'published',
-        author_name: 'John Smith',
-        author_title: 'Photographer',
-        content: 'I use ShareLoc for all my client shoots now. The variety of aesthetic styles available is unmatched.',
-        rating: 5,
-        location: 2
+        client_name: 'John Smith',
+        company: 'Smith Visuals',
+        feedback: 'I use ShareLoc for all my client shoots now. The variety of aesthetic styles available is unmatched.',
+        location_id: 2,
+        bts_photos: ['mock-image-id-bts-3']
       },
       {
         id: 3,
         status: 'published',
-        author_name: 'Alice Johnson',
-        author_title: 'Event Planner',
-        content: 'Great spaces, but I wish there were more minimalist options in my specific area.',
-        rating: 4,
-        location: 3
+        client_name: 'Alice Johnson',
+        company: 'Johnson Events Co.',
+        feedback: 'Great spaces, and the team was incredibly responsive throughout our event planning process.',
+        location_id: 3,
+        bts_photos: []
       }
     ]
   };
