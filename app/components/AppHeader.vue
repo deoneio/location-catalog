@@ -1,6 +1,8 @@
 <template>
-  <header class="site-header glass-panel">
-    <NuxtLink to="/" class="brand" @click="closeMenu">{{ siteName }}</NuxtLink>
+  <header class="site-header glass-panel" :class="{ 'site-header--scrolled': isScrolled }">
+    <NuxtLink to="/" class="brand" @click="closeMenu">
+      <img src="/images/logo.png" :alt="siteName" class="brand-logo" />
+    </NuxtLink>
 
     <nav class="nav" :class="{ 'nav--open': isMenuOpen }">
       <NuxtLink
@@ -13,6 +15,8 @@
         {{ link.label }}
       </NuxtLink>
     </nav>
+
+    <div class="header-actions" aria-hidden="true" />
 
     <button
       type="button"
@@ -30,7 +34,7 @@
 <script setup>
 import { useAppHeader } from '~/scripts/components/AppHeader.js'
 
-const { siteName, navLinks, isMenuOpen, toggleMenu, closeMenu } = useAppHeader()
+const { siteName, navLinks, isMenuOpen, isScrolled, toggleMenu, closeMenu } = useAppHeader()
 </script>
 
 <style scoped>
@@ -38,28 +42,50 @@ const { siteName, navLinks, isMenuOpen, toggleMenu, closeMenu } = useAppHeader()
   position: sticky;
   top: 0;
   z-index: 40;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  column-gap: 1rem;
   padding: 1rem 1.5rem;
   border-radius: 0;
   border-width: 0 0 1px;
   /* Override the shared .glass-panel background: it's a neutral white tint,
      but the header needs to read warm even over non-cream backdrops (hero images, etc). */
-  background: hsla(36, 30%, 97%, 0.72);
+  background: hsla(36, 30%, 97%, 0.45);
+  transition: background-color var(--transition-fast);
+}
+
+.site-header--scrolled {
+  background: hsla(36, 30%, 97%, 0.94);
 }
 
 .brand {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: 1.25rem;
-  letter-spacing: 0.06em;
+  grid-column: 1;
+  justify-self: start;
+  display: flex;
+  align-items: center;
+}
+
+.brand-logo {
+  display: block;
+  height: 2rem;
+  width: auto;
 }
 
 .nav {
+  grid-column: 2;
+  justify-self: center;
   display: flex;
   gap: 2rem;
+}
+
+/* Empty for now — reserves the right-hand column so the centered nav
+   doesn't drift when a button/icon lands here later. Width approximates
+   the logo's rendered width so both outer grid columns stay balanced. */
+.header-actions {
+  grid-column: 3;
+  justify-self: end;
+  min-width: 7.5rem;
 }
 
 .nav-link {
@@ -134,6 +160,18 @@ const { siteName, navLinks, isMenuOpen, toggleMenu, closeMenu } = useAppHeader()
 }
 
 @media (max-width: 640px) {
+  .site-header {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .header-actions {
+    display: none;
+  }
+
+  .menu-toggle {
+    grid-column: 3;
+  }
+
   .nav {
     position: absolute;
     top: 100%;
