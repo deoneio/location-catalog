@@ -2,7 +2,7 @@
   <div class="detail-page page-container">
     <p v-if="pending">Loading location&hellip;</p>
 
-    <template v-else-if="location">
+    <div v-else-if="location" class="detail-layout">
       <section class="gallery" v-reveal>
         <div class="gallery-main">
           <img v-if="activeImage?.url" :src="activeImage.url" :alt="location.name" />
@@ -43,7 +43,7 @@
           Inquire About This Location
         </a>
       </section>
-    </template>
+    </div>
 
     <p v-else class="empty-state">Location not found.</p>
   </div>
@@ -57,6 +57,26 @@ const { pending, location, galleryImages, activeImageIndex, activeImage, selectI
 </script>
 
 <style scoped>
+/* Mobile-first: gallery then info stack in document order, unchanged. */
+@media (min-width: 1024px) {
+  .detail-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-10);
+    align-items: start;
+  }
+
+  .gallery {
+    /* Clears the sticky site header (~4rem tall) while pinned. */
+    position: sticky;
+    top: 5rem;
+  }
+
+  .info {
+    margin-top: 0;
+  }
+}
+
 .gallery-main {
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-lg);
@@ -126,7 +146,7 @@ const { pending, location, galleryImages, activeImageIndex, activeImage, selectI
 
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin: 2rem 0;
 }
