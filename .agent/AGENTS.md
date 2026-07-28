@@ -11,6 +11,7 @@ This profile adapts Superpowers workflows for Antigravity with strict single-flo
 3. Use `browser_subagent` only for browser automation tasks.
 4. Track checklist progress in `<project-root>/docs/plans/task.md` (table-only live tracker).
 5. Keep changes scoped to the requested task and verify before completion claims.
+6. **Git Branching Rule:** NEVER commit or push directly to `main` or `develop` branches. Always create a new branch (e.g. `feature/*`, `fix/*`, `docs/*`) and submit changes via Pull Request.
 
 ## Tool Translation Contract
 
@@ -83,4 +84,5 @@ Before saying a task is done:
 2. **CSS Rule:** Use exclusively Vanilla CSS. Do NOT use Tailwind unless explicitly asked by the user in the future.
 3. **Mock Data:** Whenever building frontend components that fetch data, ensure it seamlessly works with the mock routes at `/api/items/...`.
 4. **Vue SFC Structure:** Keep the `.vue` files clean. Place JS/TS logic in dedicated files under `app/scripts/pages/` (e.g. `<script setup src="~/scripts/pages/index.js"></script>`) and keep CSS merged inside the `.vue` file using `<style scoped>`.
-5. **Current Status:** Foundation is fully set. Next phase is building the global layouts (Navbar/Footer) and the frontend pages using the mock API.
+5. **No Direct Commits to Main/Develop:** Never commit or push directly to `main` or `develop` branches under any circumstances. Always create a dedicated branch and submit changes via Pull Request.
+6. **Current Status:** Foundation & Docker CI set up. Next phase is building the global layouts (Navbar/Footer) and frontend pages.
