@@ -125,3 +125,24 @@ For the best development experience with this project stack, install the followi
 3. **ESLint** (`dbaeumer.vscode-eslint`): For JavaScript/TypeScript linting and formatting.
 4. **Prettier** (`esbenp.prettier-vscode`): For consistent code formatting.
 5. **SQLite Viewer** (`qwtel.sqlite-viewer`): Very useful for viewing and debugging the local Directus database (`scripts/directus-schema/database/data.db`) directly in your editor.
+
+## Docker Setup
+
+The application and CMS can be launched together using Docker Compose with an Nginx reverse proxy:
+
+```bash
+# Start all containers (Nginx, Nuxt 3, Directus CMS)
+npm run docker:up
+
+# View live container logs
+npm run docker:logs
+
+# Stop containers
+npm run docker:down
+```
+
+### Access Endpoints:
+- **Web App**: `http://localhost/`
+- **Directus Public API**: `http://localhost/api/items/locations`
+- **CMS Admin Interface**: `http://cms.localhost/`
+
