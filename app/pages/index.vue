@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script setup src="~/scripts/pages/index.js"></script>
+<script src="~/scripts/pages/index.js"></script>
 
 <style scoped>
 /* Scoped styles go here */
