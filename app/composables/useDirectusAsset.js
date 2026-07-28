@@ -3,6 +3,10 @@ export function useDirectusAsset(fileId) {
     return null
   }
 
+  if (fileId.startsWith('/') || fileId.startsWith('http://') || fileId.startsWith('https://')) {
+    return fileId
+  }
+
   const config = useRuntimeConfig()
   return `${config.public.directusUrl}/assets/${fileId}`
 }
