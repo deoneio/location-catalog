@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { useCatalogPage } from '~/scripts/pages/catalog.js'
+import { useCatalogPage } from '~/scripts/pages/catalog/index.js'
 
 const { pending, styleOptions, selectedStyle, minCapacity, filteredLocations, resetFilters } = useCatalogPage()
 </script>
