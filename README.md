@@ -146,3 +146,11 @@ npm run docker:down
 - **Directus Public API**: `http://localhost/api/items/locations`
 - **CMS Admin Interface**: `http://cms.localhost/`
 
+## CI/CD Pipeline (GitHub Actions)
+
+Multi-architecture (`linux/amd64`, `linux/arm64`) Docker images are automatically built and published to **GitHub Container Registry (`ghcr.io`)**:
+
+- **`develop` branch:** Builds and pushes to `ghcr.io/<owner>/shareloc-web:test` on every commit/merge.
+- **`main` branch:** Automatically bumps Semantic Version (e.g. `v1.0.0` $\rightarrow$ `v1.0.1`), tags the Git commit, and pushes to `ghcr.io/<owner>/shareloc-web:v1.0.x` and `latest`.
+
+
