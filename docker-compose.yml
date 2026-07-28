@@ -1,0 +1,55 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: shareloc-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - nuxt
+      - directus
+    networks:
+      - shareloc-network
+
+  nuxt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shareloc-nuxt
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - HOST=0.0.0.0
+      - USE_MOCK=false
+      - DIRECTUS_URL=http://directus:8055
+    networks:
+      - shareloc-network
+    depends_on:
+      - directus
+
+  directus:
+    image: directus/directus:11
+    container_name: shareloc-directus
+    restart: unless-stopped
+    environment:
+      KEY: "${DIRECTUS_KEY:-shareloc-secret-key}"
+      SECRET: "${DIRECTUS_SECRET:-shareloc-secret-value}"
+      ADMIN_EMAIL: "${ADMIN_EMAIL:-admin@shareloc.com}"
+      ADMIN_PASSWORD: "${ADMIN_PASSWORD:-Admin123456!}"
+      DB_CLIENT: "sqlite3"
+      DB_FILENAME: "/directus/database/data.db"
+      CORS_ENABLED: "true"
+      CORS_ORIGIN: "true"
+    volumes:
+      - ./data/directus/database:/directus/database
+      - ./data/directus/uploads:/directus/uploads
+    networks:
+      - shareloc-network
+
+networks:
+  shareloc-network:
+    driver: bridge
