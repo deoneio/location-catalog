@@ -10,7 +10,8 @@
     "postinstall": "nuxt prepare",
     "docker:up": "docker compose up -d --build",
     "docker:down": "docker compose down",
-    "docker:logs": "docker compose logs -f"
+    "docker:logs": "docker compose logs -f",
+    "directus:migrate": "node scripts/migrations/runner.js"
   },
   "dependencies": {
     "nuxt": "^4.4.8",

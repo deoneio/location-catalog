@@ -1,5 +1,5 @@
-| Task | Status | Details |
-| --- | --- | --- |
-| Task 1: Create `.github/workflows/docker-ci.yml` | Done | Created `.github/workflows/docker-ci.yml` |
-| Task 2: Update Documentation and Script Reference | Done | Added CI / GHCR instructions to `README.md` |
-| Task 3: Push to `develop` & `main` and Verify Workflow Execution | Done | Pushed to `main` & `develop`; verified workflows triggered (Runs #30320467021 & #30320468262) |
+| Task | Status |
+|---|---|
+| Task 1: Create Migration Runner (`scripts/migrations/runner.js`) | done |
+| Task 2: Create Initial Migration Scripts (`001_...js`, `002_...js`) | done |
+| Task 3: Package Script & PR | done |

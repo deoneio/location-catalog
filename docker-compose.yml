@@ -44,6 +44,7 @@ services:
       - ./data/directus/database:/directus/database
       - ./data/directus/uploads:/directus/uploads
       - ./data/extensions_cache:/directus/node_modules/.directus
+      - ./scripts:/directus/scripts
     networks:
       - shareloc-network
 
