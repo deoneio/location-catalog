@@ -3,8 +3,6 @@ services:
     image: nginx:alpine
     container_name: shareloc-nginx
     restart: unless-stopped
-    ports:
-      - "80:80"
     volumes:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
@@ -15,9 +13,10 @@ services:
       - shareloc-network
 
   nuxt:
-    image: ghcr.io/deoneio/location-catalog:latest
+    image: ghcr.io/deoneio/location-catalog:test
     container_name: shareloc-nuxt
     restart: unless-stopped
+    user: "${UID:-1000}:${GID:-1000}"
     environment:
       - NODE_ENV=production
       - PORT=3000
@@ -30,9 +29,10 @@ services:
       - directus
 
   directus:
-    image: directus/directus:11
+    image: directus/directus:12
     container_name: shareloc-directus
     restart: unless-stopped
+    user: "1002:1002"
     environment:
       KEY: "${DIRECTUS_KEY:-shareloc-secret-key}"
       SECRET: "${DIRECTUS_SECRET:-shareloc-secret-value}"
@@ -40,11 +40,12 @@ services:
       ADMIN_PASSWORD: "${ADMIN_PASSWORD:-Admin123456!}"
       DB_CLIENT: "sqlite3"
       DB_FILENAME: "/directus/database/data.db"
-      CORS_ENABLED: "true"
-      CORS_ORIGIN: "true"
+      PM2_HOME: "/tmp/pm2"
+      PUBLIC_URL: "${CMS_PUBLIC_URL}"
     volumes:
       - ./data/directus/database:/directus/database
       - ./data/directus/uploads:/directus/uploads
+      - ./data/extensions_cache:/directus/node_modules/.directus
     networks:
       - shareloc-network
 
@@ -53,12 +54,16 @@ services:
     container_name: shareloc-cloudflared
     restart: unless-stopped
     command: tunnel --no-autoupdate run
+    user: "${UID:-1000}:${GID:-1000}"
     environment:
       - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN:-}
     networks:
       - shareloc-network
     depends_on:
       - nginx
+    dns:
+      - 1.1.1.1
+      - 1.0.0.1
 
 networks:
   shareloc-network:
