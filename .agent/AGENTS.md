@@ -83,16 +83,45 @@ Before saying a task is done:
 1. **Aesthetics are Critical:** The client demands a premium, modern, dynamic design. Do not produce generic minimal-viable UI. Use glassmorphism, modern typography (Inter/Roboto/Outfit), subtle micro-animations, and curated HSL palettes.
 2. **CSS Rule:** Use exclusively Vanilla CSS. Do NOT use Tailwind unless explicitly asked by the user in the future.
 3. **Mock Data:** Whenever building frontend components that fetch data, ensure it seamlessly works with the mock routes at `/api/items/...`.
-4. **Vue SFC Structure:** Keep the `.vue` files clean. Place JS/TS logic in dedicated files under `app/scripts/...` (mirroring the component/page path), exported as a named `useXxx()` function, and wire it into the component with a normal inline `<script setup>` block:
+4. **Vue SFC Structure:** Keep `.vue` files clean. Place JS/TS logic in dedicated files under `app/scripts/...` (mirroring the component/page path), exported as a named `useXxx()` function, and wire it into the component with an inline `<script setup>` block:
    ```vue
    <script setup>
    import { useIndexPage } from '~/scripts/pages/index.js'
 
-   const { locations } = useIndexPage()
+   const { heroTitle } = useIndexPage()
    </script>
    ```
-   Note: `<script setup src="...">` is invalid Vue syntax (the compiler rejects `setup` combined with `src` — ambiguous macro resolution) and must not be used. Keep CSS merged inside the `.vue` file using `<style scoped>`.
-5. **Current Status:** Foundation is fully set. Next phase is building the global layouts (Navbar/Footer) and the frontend pages using the mock API.
-4. **Vue SFC Structure:** Keep the `.vue` files clean. Place JS/TS logic in dedicated files under `app/scripts/pages/` (e.g. `<script setup src="~/scripts/pages/index.js"></script>`) and keep CSS merged inside the `.vue` file using `<style scoped>`.
-5. **No Direct Commits to Main/Develop:** Never commit or push directly to `main` or `develop` branches under any circumstances. Always create a dedicated branch and submit changes via Pull Request.
-6. **Current Status:** Foundation & Docker CI set up. Next phase is building the global layouts (Navbar/Footer) and frontend pages.
+   *Note:* Do NOT use `<script setup src="...">` as the Vue compiler rejects `setup` combined with `src`. Keep CSS scoped inside the `.vue` file using `<style scoped>`.
+
+5. **Git Branching Rule:** NEVER commit or push directly to `main` or `develop` branches under any circumstances. Always create a dedicated branch (e.g. `feature/*`, `fix/*`, `docs/*`) and submit changes via Pull Request.
+
+---
+
+## Architectural & Technical Learnings
+
+### 1. Directus Singleton Collections Gotcha (`homepage_config`)
+- **Symptom:** Opening an empty singleton collection in Directus Admin UI throws `ID (Hidden): Value is required`.
+- **Cause:** When a singleton collection has 0 rows in the database, Directus attempts to create a new item (`POST /items/<singleton>`). Because `id` is hidden without auto-increment metadata, Directus validation fails.
+- **Solution:**
+  1. Set `special: 'cast-int'` in `directus_fields` for `id`.
+  2. Seed initial singleton row `id: 1` into the database. Once `id: 1` exists, Directus opens the form in edit mode (`PATCH /items/<singleton>/1`).
+
+### 2. Versioned Database Migration Runner (`scripts/migrations/`)
+- **Tracking Table:** `_schema_migrations` (`id`, `name`, `executed_at`).
+- **Runner Script:** `scripts/migrations/runner.js` (`npm run directus:migrate`).
+- **Migration Scripts Directory:** `scripts/migrations/` (numerically prefixed `.js` files, e.g., `001_grant_public_permissions.js`, `002_seed_homepage_config.js`).
+- **Execution Model:** Automatically discovers scripts, queries `_schema_migrations`, skips already executed scripts, and runs pending `up(knex)` functions sequentially in order.
+
+### 3. Nginx Media Assets Proxy (`/assets/`) & Relative Asset Paths
+- **Nginx Configuration ([docker/nginx/conf.d/default.conf](file:///home/audias/docker/location-catalog-test/docker/nginx/conf.d/default.conf)):**
+  ```nginx
+  location /assets/ {
+      proxy_pass http://directus:8055/assets/;
+      ...
+  }
+  ```
+- **Frontend Composable ([app/composables/useDirectusAsset.js](file:///home/audias/docker/location-catalog-test/app/composables/useDirectusAsset.js)):** Returns relative path `/assets/${fileId}` so asset URLs automatically adapt to the user's active domain/port.
+- **Nuxt Server Proxy Fallback ([server/routes/assets/[...].ts](file:///home/audias/docker/location-catalog-test/server/routes/assets/[...].ts)):** Proxies `/assets/**` to Directus during local development (`npm run dev`) or SSR.
+
+### 4. Dynamic API Runtime Proxying
+- API routes (`server/routes/api/[...].ts`) proxy dynamically to `DIRECTUS_URL` using `proxyRequest` from `h3`. Changes to `DIRECTUS_URL` in `docker-compose.yml` or `.env` take effect at runtime without requiring image rebuilds.
