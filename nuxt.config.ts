@@ -19,14 +19,12 @@ export default defineNuxtConfig({
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },
-  routeRules: useMock ? {} : {
-    '/api/**': { proxy: (process.env.DIRECTUS_URL || 'http://10.169.6.124:8055') + '/**' }
-  },
+
   runtimeConfig: {
     public: {
       siteName: 'ShareLoc',
       useMock,
-      directusUrl: process.env.DIRECTUS_URL || 'http://10.169.6.124:8055',
+      directusUrl: process.env.DIRECTUS_URL || 'http://directus:8055',
       whatsappNumber: process.env.WHATSAPP_NUMBER || '6281234567890',
       contactEmail: process.env.CONTACT_EMAIL || 'hello@shareloc.example',
       contactPhone: process.env.CONTACT_PHONE || '+62 812-3456-7890',

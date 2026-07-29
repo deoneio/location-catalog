@@ -10,7 +10,7 @@ export default defineNitroPlugin((nitroApp) => {
       const duration = event.context._startTime ? `${Date.now() - event.context._startTime}ms` : ''
 
       if (statusCode >= 400) {
-        const directusUrl = process.env.DIRECTUS_URL || 'http://10.169.6.124:8055'
+        const directusUrl = process.env.DIRECTUS_URL || 'http://directus:8055'
         const targetUrl = `${directusUrl}${path.replace(/^\/api/, '')}`
         console.error(
           `[Nuxt Server API Error] ${event.method || 'GET'} ${path} -> Target: ${targetUrl} | Status: ${statusCode} | Duration: ${duration}`
@@ -22,7 +22,7 @@ export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('error', (error: any, { event }) => {
     if (event && event.path && event.path.startsWith('/api/')) {
       const duration = event.context?._startTime ? `${Date.now() - event.context._startTime}ms` : ''
-      const directusUrl = process.env.DIRECTUS_URL || 'http://10.169.6.124:8055'
+      const directusUrl = process.env.DIRECTUS_URL || 'http://directus:8055'
       const targetUrl = `${directusUrl}${event.path.replace(/^\/api/, '')}`
 
       const isTimeout = error.message?.includes('timeout') || error.code === 'ETIMEDOUT' || error.name === 'TimeoutError'
