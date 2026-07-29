@@ -48,6 +48,18 @@ services:
     networks:
       - shareloc-network
 
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: shareloc-cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      - TUNNEL_TOKEN=${CLOUDFLARE_TUNNEL_TOKEN:-}
+    networks:
+      - shareloc-network
+    depends_on:
+      - nginx
+
 networks:
   shareloc-network:
     driver: bridge
