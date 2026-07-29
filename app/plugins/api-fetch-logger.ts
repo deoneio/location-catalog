@@ -2,7 +2,9 @@ export default defineNuxtPlugin((nuxtApp) => {
   // Intercept global $fetch during SSR to log API fetch failures & timeouts
   const originalFetch = globalThis.$fetch
   if (typeof originalFetch === 'function') {
+    const timeoutMs = Number(process.env.API_TIMEOUT || 5000)
     globalThis.$fetch = $fetch.create({
+      timeout: timeoutMs,
       onRequestError({ request, error }) {
         if (import.meta.server) {
           console.error(`[Nuxt SSR $fetch Request Error] Request to '${request}' failed: ${error?.message || error}`)
