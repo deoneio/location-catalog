@@ -4,35 +4,78 @@ export function useCatalogPage() {
 
   const locations = computed(() => locationsResponse.value?.data ?? [])
 
-  const styleOptions = computed(() => {
-    const styles = new Set(locations.value.map((location) => location.aesthetic_style).filter(Boolean))
-    return Array.from(styles)
+  const categoryOptions = computed(() => {
+    const categories = new Set(locations.value.flatMap((location) => location.categories || []))
+    return Array.from(categories)
   })
 
-  const initialStyle = Array.isArray(route.query.style) ? route.query.style[0] : route.query.style
-  const initialCapacity = Array.isArray(route.query.capacity) ? route.query.capacity[0] : route.query.capacity
+  const houseTypeOptions = computed(() => {
+    const houseTypes = new Set(locations.value.flatMap((location) => location.house_type || []))
+    return Array.from(houseTypes)
+  })
 
-  const selectedStyle = ref(initialStyle || '')
-  const minCapacity = ref(initialCapacity ? Number(initialCapacity) : null)
+  const cityOptions = computed(() => {
+    const cities = new Set(locations.value.map((location) => location.city).filter(Boolean))
+    return Array.from(cities)
+  })
+
+  const initialCategories = route.query.categories
+    ? Array.isArray(route.query.categories)
+      ? route.query.categories
+      : [route.query.categories]
+    : []
+  const initialHouseTypes = route.query.house_type
+    ? Array.isArray(route.query.house_type)
+      ? route.query.house_type
+      : [route.query.house_type]
+    : []
+  const initialCity = Array.isArray(route.query.city) ? route.query.city[0] : route.query.city
+
+  const selectedCategories = ref(initialCategories)
+  const selectedHouseTypes = ref(initialHouseTypes)
+  const selectedCity = ref(initialCity || '')
+
+  function toggleCategory(category) {
+    selectedCategories.value = selectedCategories.value.includes(category)
+      ? selectedCategories.value.filter((c) => c !== category)
+      : [...selectedCategories.value, category]
+  }
+
+  function toggleHouseType(houseType) {
+    selectedHouseTypes.value = selectedHouseTypes.value.includes(houseType)
+      ? selectedHouseTypes.value.filter((h) => h !== houseType)
+      : [...selectedHouseTypes.value, houseType]
+  }
 
   const filteredLocations = computed(() =>
     locations.value.filter((location) => {
-      const matchesStyle = !selectedStyle.value || location.aesthetic_style === selectedStyle.value
-      const matchesCapacity = !minCapacity.value || location.capacity >= Number(minCapacity.value)
-      return matchesStyle && matchesCapacity
+      const matchesCategories = selectedCategories.value.every((category) =>
+        (location.categories || []).includes(category)
+      )
+      const matchesHouseTypes = selectedHouseTypes.value.every((houseType) =>
+        (location.house_type || []).includes(houseType)
+      )
+      const matchesCity = !selectedCity.value || location.city === selectedCity.value
+      return matchesCategories && matchesHouseTypes && matchesCity
     })
   )
 
   function resetFilters() {
-    selectedStyle.value = ''
-    minCapacity.value = null
+    selectedCategories.value = []
+    selectedHouseTypes.value = []
+    selectedCity.value = ''
   }
 
   return {
     pending,
-    styleOptions,
-    selectedStyle,
-    minCapacity,
+    categoryOptions,
+    selectedCategories,
+    toggleCategory,
+    houseTypeOptions,
+    selectedHouseTypes,
+    toggleHouseType,
+    cityOptions,
+    selectedCity,
     filteredLocations,
     resetFilters
   }

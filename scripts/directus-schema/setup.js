@@ -43,8 +43,6 @@ async function setupSchema() {
       { field: 'name', type: 'string', meta: { interface: 'input' } },
       { field: 'slug', type: 'string', meta: { interface: 'input' }, schema: { is_unique: true } },
       { field: 'description', type: 'text', meta: { interface: 'input-wysiwyg' } },
-      { field: 'aesthetic_style', type: 'string', meta: { interface: 'input' } },
-      { field: 'capacity', type: 'integer', meta: { interface: 'input' } },
       { field: 'is_featured', type: 'boolean', meta: { interface: 'boolean' }, schema: { default_value: false } },
       { field: 'thumbnail', type: 'uuid', meta: { interface: 'file-image' } },
       { field: 'key_features', type: 'text', meta: { interface: 'input-wysiwyg' } },

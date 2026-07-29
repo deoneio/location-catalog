@@ -12,17 +12,44 @@
 
         <form class="hero-search" @submit.prevent="submitSearch">
           <label>
-            Style
-            <select v-model="searchStyle">
-              <option value="">All styles</option>
-              <option v-for="style in styleOptions" :key="style" :value="style">{{ style }}</option>
+            City
+            <select v-model="searchCity">
+              <option value="">All cities</option>
+              <option v-for="city in cityOptions" :key="city" :value="city">{{ city }}</option>
             </select>
           </label>
 
-          <label>
-            Minimum capacity
-            <input v-model.number="searchCapacity" type="number" min="0" placeholder="Any" />
-          </label>
+          <div class="hero-search-categories">
+            Categories
+            <div class="category-pills">
+              <button
+                v-for="category in categoryOptions"
+                :key="category"
+                type="button"
+                class="category-pill-toggle"
+                :class="{ 'category-pill-toggle--active': searchCategories.includes(category) }"
+                @click="toggleSearchCategory(category)"
+              >
+                {{ category }}
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-search-categories">
+            House Type
+            <div class="category-pills">
+              <button
+                v-for="type in houseTypeOptions"
+                :key="type"
+                type="button"
+                class="category-pill-toggle"
+                :class="{ 'category-pill-toggle--active': searchHouseTypes.includes(type) }"
+                @click="toggleSearchHouseType(type)"
+              >
+                {{ type }}
+              </button>
+            </div>
+          </div>
 
           <button type="submit" class="btn btn-accent hero-search-submit">Search Locations</button>
         </form>
@@ -59,9 +86,14 @@ const {
   heroTitle,
   valueProposition,
   featuredLocations,
-  styleOptions,
-  searchStyle,
-  searchCapacity,
+  categoryOptions,
+  searchCategories,
+  toggleSearchCategory,
+  houseTypeOptions,
+  searchHouseTypes,
+  toggleSearchHouseType,
+  cityOptions,
+  searchCity,
   submitSearch
 } = useIndexPage()
 </script>
@@ -179,6 +211,43 @@ const {
   margin-left: var(--space-5);
   padding: var(--space-2) var(--space-4);
   font-size: var(--text-sm);
+}
+
+.hero-search-categories {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-1);
+  padding: 0 var(--space-5);
+  font-family: var(--font-body);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+}
+
+.hero-search-categories .category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+
+.hero-search-categories .category-pill-toggle {
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font: inherit;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.hero-search-categories .category-pill-toggle--active {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
 }
 
 @media (max-width: 640px) {
