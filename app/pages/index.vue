@@ -7,8 +7,8 @@
         <div class="hero-overlay" />
       </div>
       <div class="hero-content" v-reveal>
-        <h1>Find the Perfect Location for Your Next Shoot</h1>
-        <p>Premium spaces for photographers, videographers, and event planners.</p>
+        <h1>{{ heroTitle }}</h1>
+        <p>{{ valueProposition }}</p>
 
         <form class="hero-search" @submit.prevent="submitSearch">
           <label>
@@ -53,8 +53,17 @@
 <script setup>
 import { useIndexPage } from '~/scripts/pages/index.js'
 
-const { heroConfig, heroImageUrl, featuredLocations, styleOptions, searchStyle, searchCapacity, submitSearch } =
-  useIndexPage()
+const {
+  heroConfig,
+  heroImageUrl,
+  heroTitle,
+  valueProposition,
+  featuredLocations,
+  styleOptions,
+  searchStyle,
+  searchCapacity,
+  submitSearch
+} = useIndexPage()
 </script>
 
 <style scoped>

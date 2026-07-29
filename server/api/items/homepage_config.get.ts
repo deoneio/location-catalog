@@ -12,6 +12,7 @@ export default defineEventHandler((event) => {
 
   return {
     data: {
+      hero_title: 'Find the Perfect Location for Your Next Shoot',
       hero_media: '/images/homepage-hero.jpg',
       hero_cta_text: 'Browse the Catalog',
       value_proposition: 'Curated, premium spaces for photographers, videographers, and event planners who need a location as striking as their vision.',
