@@ -36,8 +36,6 @@ services:
     environment:
       KEY: "${DIRECTUS_KEY:-shareloc-secret-key}"
       SECRET: "${DIRECTUS_SECRET:-shareloc-secret-value}"
-      ADMIN_EMAIL: "${ADMIN_EMAIL:-admin@shareloc.com}"
-      ADMIN_PASSWORD: "${ADMIN_PASSWORD:-Admin123456!}"
       DB_CLIENT: "sqlite3"
       DB_FILENAME: "/directus/database/data.db"
       PM2_HOME: "/tmp/pm2"
