@@ -4,6 +4,8 @@ export function useIndexPage() {
 
   const heroConfig = computed(() => configResponse.value?.data ?? null)
   const heroImageUrl = computed(() => useDirectusAsset(heroConfig.value?.hero_media))
+  const heroTitle = computed(() => heroConfig.value?.hero_title || 'Find the Perfect Location for Your Next Shoot')
+  const valueProposition = computed(() => heroConfig.value?.value_proposition || 'Premium spaces for photographers, videographers, and event planners.')
 
   const locations = computed(() => locationsResponse.value?.data ?? [])
 
@@ -28,6 +30,8 @@ export function useIndexPage() {
   return {
     heroConfig,
     heroImageUrl,
+    heroTitle,
+    valueProposition,
     featuredLocations,
     styleOptions,
     searchStyle,
