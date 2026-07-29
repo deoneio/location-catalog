@@ -15,9 +15,7 @@ services:
       - shareloc-network
 
   nuxt:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/deoneio/location-catalog:latest
     container_name: shareloc-nuxt
     restart: unless-stopped
     environment:
