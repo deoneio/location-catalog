@@ -7,6 +7,5 @@ export function useDirectusAsset(fileId) {
     return fileId
   }
 
-  const config = useRuntimeConfig()
-  return `${config.public.directusUrl}/assets/${fileId}`
+  return `/assets/${fileId}`
 }
