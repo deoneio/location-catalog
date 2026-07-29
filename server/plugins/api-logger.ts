@@ -33,7 +33,7 @@ export default defineNitroPlugin((nitroApp) => {
       if (isRefused) reason = `Connection refused - backend server unreachable at ${targetUrl}`
 
       console.error(
-        `[Nuxt Server API Failure] ${event.method || 'GET'} ${event.path} | Error: ${reason} | Code: ${error.code || 'N/A'} | Duration: ${duration}`
+        `[Nuxt Server API Failure] ${event.method || 'GET'} ${event.path} -> Target: ${targetUrl} | Error: ${reason} | Code: ${error.code || 'N/A'} | Duration: ${duration}`
       )
     }
   })
