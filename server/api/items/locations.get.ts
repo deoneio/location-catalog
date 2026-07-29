@@ -1,4 +1,5 @@
 import { getQuery } from 'h3'
+import { proxyRequest } from 'h3'
 
 const mockLocations = [
   {
@@ -52,6 +53,15 @@ const mockLocations = [
 ];
 
 export default defineEventHandler((event) => {
+  const config = useRuntimeConfig()
+  const useMock = String(config.public.useMock) === 'true' || process.env.USE_MOCK === 'true'
+
+  if (!useMock) {
+    const directusUrl = process.env.DIRECTUS_URL || config.public.directusUrl || 'http://directus:8055'
+    const targetUrl = `${directusUrl}${event.path.replace(/^\/api/, '')}`
+    return proxyRequest(event, targetUrl)
+  }
+
   const query = getQuery(event);
   
   // Basic simulation of Directus filter by slug: ?filter[slug][_eq]=value
