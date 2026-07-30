@@ -6,7 +6,15 @@
     </div>
     <div class="location-card-body">
       <h3>{{ location.name }}</h3>
-      <p class="location-card-meta">{{ location.aesthetic_style }} &middot; Up to {{ location.capacity }} people</p>
+      <div v-if="location.house_type?.length" class="location-card-house-types">
+        <span
+          v-for="type in location.house_type.slice(0, 2)"
+          :key="type"
+          class="location-card-house-type-pill"
+        >
+          {{ type }}
+        </span>
+      </div>
     </div>
   </NuxtLink>
 </template>
@@ -66,9 +74,20 @@ const { thumbnailUrl } = useLocationCard(props)
   font-size: 1.05rem;
 }
 
-.location-card-meta {
-  margin: 0;
+.location-card-house-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.location-card-house-type-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  font-size: 0.75rem;
   color: var(--color-text-muted);
-  font-size: 0.9rem;
 }
 </style>

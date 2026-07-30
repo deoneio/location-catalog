@@ -3,18 +3,29 @@
     <h1 v-reveal>Catalog</h1>
 
     <form class="filters glass-panel" @submit.prevent>
-      <label>
-        <span>Style</span>
-        <select v-model="selectedStyle">
-          <option value="">All styles</option>
-          <option v-for="style in styleOptions" :key="style" :value="style">{{ style }}</option>
+      <div class="filter-group">
+        <span>City</span>
+        <select v-model="selectedCity">
+          <option value="">All cities</option>
+          <option v-for="city in cityOptions" :key="city" :value="city">{{ city }}</option>
         </select>
-      </label>
+      </div>
 
-      <label>
-        <span>Minimum capacity</span>
-        <input v-model.number="minCapacity" type="number" min="0" placeholder="Any" />
-      </label>
+      <MultiSelectFilter
+        label="Categories"
+        :options="categoryOptions"
+        :selected="selectedCategories"
+        @toggle="toggleCategory"
+        @clear="selectedCategories = []"
+      />
+
+      <MultiSelectFilter
+        label="House Type"
+        :options="houseTypeOptions"
+        :selected="selectedHouseTypes"
+        @toggle="toggleHouseType"
+        @clear="selectedHouseTypes = []"
+      />
 
       <button type="button" class="reset-btn" @click="resetFilters">Reset</button>
     </form>
@@ -30,7 +41,19 @@
 <script setup>
 import { useCatalogPage } from '~/scripts/pages/catalog/index.js'
 
-const { pending, styleOptions, selectedStyle, minCapacity, filteredLocations, resetFilters } = useCatalogPage()
+const {
+  pending,
+  categoryOptions,
+  selectedCategories,
+  toggleCategory,
+  houseTypeOptions,
+  selectedHouseTypes,
+  toggleHouseType,
+  cityOptions,
+  selectedCity,
+  filteredLocations,
+  resetFilters
+} = useCatalogPage()
 </script>
 
 <style scoped>
@@ -71,6 +94,14 @@ h1 {
   outline: none;
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px hsla(32, 85%, 55%, 0.25);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
 }
 
 .reset-btn {

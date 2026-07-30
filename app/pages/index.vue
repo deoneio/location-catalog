@@ -12,17 +12,32 @@
 
         <form class="hero-search" @submit.prevent="submitSearch">
           <label>
-            Style
-            <select v-model="searchStyle">
-              <option value="">All styles</option>
-              <option v-for="style in styleOptions" :key="style" :value="style">{{ style }}</option>
+            City
+            <select v-model="searchCity">
+              <option value="">All cities</option>
+              <option v-for="city in cityOptions" :key="city" :value="city">{{ city }}</option>
             </select>
           </label>
 
-          <label>
-            Minimum capacity
-            <input v-model.number="searchCapacity" type="number" min="0" placeholder="Any" />
-          </label>
+          <div class="hero-search-filter">
+            <MultiSelectFilter
+              label="Categories"
+              :options="categoryOptions"
+              :selected="searchCategories"
+              @toggle="toggleSearchCategory"
+              @clear="searchCategories = []"
+            />
+          </div>
+
+          <div class="hero-search-filter">
+            <MultiSelectFilter
+              label="House Type"
+              :options="houseTypeOptions"
+              :selected="searchHouseTypes"
+              @toggle="toggleSearchHouseType"
+              @clear="searchHouseTypes = []"
+            />
+          </div>
 
           <button type="submit" class="btn btn-accent hero-search-submit">Search Locations</button>
         </form>
@@ -59,9 +74,14 @@ const {
   heroTitle,
   valueProposition,
   featuredLocations,
-  styleOptions,
-  searchStyle,
-  searchCapacity,
+  categoryOptions,
+  searchCategories,
+  toggleSearchCategory,
+  houseTypeOptions,
+  searchHouseTypes,
+  toggleSearchHouseType,
+  cityOptions,
+  searchCity,
   submitSearch
 } = useIndexPage()
 </script>
@@ -181,6 +201,12 @@ const {
   font-size: var(--text-sm);
 }
 
+.hero-search-filter {
+  display: flex;
+  align-items: center;
+  padding: 0 var(--space-5);
+}
+
 @media (max-width: 640px) {
   .hero-search {
     flex-direction: column;
@@ -194,6 +220,10 @@ const {
 
   .hero-search label {
     padding: var(--space-3) 0;
+  }
+
+  .hero-search-filter {
+    padding: var(--space-3) var(--space-5);
   }
 
   .hero-search-submit {
