@@ -370,10 +370,21 @@ fields:
     type: integer
     meta:
       hidden: true
+      special:
+        - cast-int
     schema:
       name: id
       type: integer
       is_primary_key: true
+  - collection: homepage_config
+    field: hero_title
+    type: string
+    meta:
+      interface: input
+    schema:
+      name: hero_title
+      type: varchar
+      max_length: 255
   - collection: homepage_config
     field: hero_media
     type: uuid

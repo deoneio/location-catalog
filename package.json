@@ -11,7 +11,7 @@
     "docker:up": "docker compose up -d --build",
     "docker:down": "docker compose down",
     "docker:logs": "docker compose logs -f",
-    "directus:migrate": "node scripts/migrations/runner.js"
+    "directus:schema-apply": "node scripts/directus-schema/apply-schema-yaml.js"
   },
   "dependencies": {
     "nuxt": "^4.4.8",

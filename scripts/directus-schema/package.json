@@ -4,10 +4,12 @@
   "description": "Script to setup Directus schema",
   "type": "module",
   "scripts": {
-    "start": "node setup.js"
+    "start": "node setup.js",
+    "apply": "node apply-schema-yaml.js"
   },
   "dependencies": {
     "@directus/sdk": "^16.0.0",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "yaml": "^2.9.0"
   }
 }

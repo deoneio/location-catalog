@@ -106,11 +106,10 @@ Before saying a task is done:
   1. Set `special: 'cast-int'` in `directus_fields` for `id`.
   2. Seed initial singleton row `id: 1` into the database. Once `id: 1` exists, Directus opens the form in edit mode (`PATCH /items/<singleton>/1`).
 
-### 2. Versioned Database Migration Runner (`scripts/migrations/`)
-- **Tracking Table:** `_schema_migrations` (`id`, `name`, `executed_at`).
-- **Runner Script:** `scripts/migrations/runner.js` (`npm run directus:migrate`).
-- **Migration Scripts Directory:** `scripts/migrations/` (numerically prefixed `.js` files, e.g., `001_grant_public_permissions.js`, `002_seed_homepage_config.js`).
-- **Execution Model:** Automatically discovers scripts, queries `_schema_migrations`, skips already executed scripts, and runs pending `up(knex)` functions sequentially in order.
+### 2. Directus Schema Management (`schema.yaml`)
+- **Single Source of Truth:** `schema.yaml` at project root.
+- **Apply Script:** `npm run directus:schema-apply` (`node scripts/directus-schema/apply-schema-yaml.js` or `./scripts/apply-schema-docker.sh`).
+- **Workflow:** All collection, field, display, and relation updates are maintained in `schema.yaml` and applied directly via Directus CLI / SDK.
 
 ### 3. Nginx Media Assets Proxy (`/assets/`) & Relative Asset Paths
 - **Nginx Configuration ([docker/nginx/conf.d/default.conf](file:///home/audias/docker/location-catalog-test/docker/nginx/conf.d/default.conf)):**
