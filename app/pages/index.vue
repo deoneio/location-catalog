@@ -19,36 +19,24 @@
             </select>
           </label>
 
-          <div class="hero-search-categories">
-            Categories
-            <div class="category-pills">
-              <button
-                v-for="category in categoryOptions"
-                :key="category"
-                type="button"
-                class="category-pill-toggle"
-                :class="{ 'category-pill-toggle--active': searchCategories.includes(category) }"
-                @click="toggleSearchCategory(category)"
-              >
-                {{ category }}
-              </button>
-            </div>
+          <div class="hero-search-filter">
+            <MultiSelectFilter
+              label="Categories"
+              :options="categoryOptions"
+              :selected="searchCategories"
+              @toggle="toggleSearchCategory"
+              @clear="searchCategories = []"
+            />
           </div>
 
-          <div class="hero-search-categories">
-            House Type
-            <div class="category-pills">
-              <button
-                v-for="type in houseTypeOptions"
-                :key="type"
-                type="button"
-                class="category-pill-toggle"
-                :class="{ 'category-pill-toggle--active': searchHouseTypes.includes(type) }"
-                @click="toggleSearchHouseType(type)"
-              >
-                {{ type }}
-              </button>
-            </div>
+          <div class="hero-search-filter">
+            <MultiSelectFilter
+              label="House Type"
+              :options="houseTypeOptions"
+              :selected="searchHouseTypes"
+              @toggle="toggleSearchHouseType"
+              @clear="searchHouseTypes = []"
+            />
           </div>
 
           <button type="submit" class="btn btn-accent hero-search-submit">Search Locations</button>
@@ -213,41 +201,10 @@ const {
   font-size: var(--text-sm);
 }
 
-.hero-search-categories {
+.hero-search-filter {
   display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  gap: var(--space-1);
+  align-items: center;
   padding: 0 var(--space-5);
-  font-family: var(--font-body);
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
-}
-
-.hero-search-categories .category-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.3rem;
-}
-
-.hero-search-categories .category-pill-toggle {
-  padding: 0.3rem 0.7rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  font: inherit;
-  font-size: var(--text-xs);
-  color: var(--color-text-muted);
-  cursor: pointer;
-  transition: border-color var(--transition-fast), color var(--transition-fast), background-color var(--transition-fast);
-}
-
-.hero-search-categories .category-pill-toggle--active {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
 }
 
 @media (max-width: 640px) {
@@ -263,6 +220,10 @@ const {
 
   .hero-search label {
     padding: var(--space-3) 0;
+  }
+
+  .hero-search-filter {
+    padding: var(--space-3) var(--space-5);
   }
 
   .hero-search-submit {

@@ -11,37 +11,21 @@
         </select>
       </div>
 
-      <div class="filter-group">
-        <span>Category</span>
-        <div class="category-pills">
-          <button
-            v-for="category in categoryOptions"
-            :key="category"
-            type="button"
-            class="category-pill-toggle"
-            :class="{ 'category-pill-toggle--active': selectedCategories.includes(category) }"
-            @click="toggleCategory(category)"
-          >
-            {{ category }}
-          </button>
-        </div>
-      </div>
+      <MultiSelectFilter
+        label="Categories"
+        :options="categoryOptions"
+        :selected="selectedCategories"
+        @toggle="toggleCategory"
+        @clear="selectedCategories = []"
+      />
 
-      <div class="filter-group">
-        <span>House Type</span>
-        <div class="category-pills">
-          <button
-            v-for="type in houseTypeOptions"
-            :key="type"
-            type="button"
-            class="category-pill-toggle"
-            :class="{ 'category-pill-toggle--active': selectedHouseTypes.includes(type) }"
-            @click="toggleHouseType(type)"
-          >
-            {{ type }}
-          </button>
-        </div>
-      </div>
+      <MultiSelectFilter
+        label="House Type"
+        :options="houseTypeOptions"
+        :selected="selectedHouseTypes"
+        @toggle="toggleHouseType"
+        @clear="selectedHouseTypes = []"
+      />
 
       <button type="button" class="reset-btn" @click="resetFilters">Reset</button>
     </form>
@@ -118,30 +102,6 @@ h1 {
   gap: 0.4rem;
   font-size: 0.85rem;
   color: var(--color-text-muted);
-}
-
-.category-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.category-pill-toggle {
-  padding: 0.45rem 0.9rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
-  font: inherit;
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
-  cursor: pointer;
-  transition: border-color var(--transition-fast), color var(--transition-fast), background-color var(--transition-fast);
-}
-
-.category-pill-toggle--active {
-  border-color: var(--color-accent);
-  color: var(--color-text);
-  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
 }
 
 .reset-btn {

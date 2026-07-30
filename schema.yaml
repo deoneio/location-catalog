@@ -145,7 +145,21 @@ fields:
     field: city
     type: string
     meta:
-      interface: input
+      interface: select-dropdown
+      options:
+        choices:
+          - text: Jakarta
+            value: Jakarta
+          - text: Bandung
+            value: Bandung
+          - text: Bogor
+            value: Bogor
+          - text: Bekasi
+            value: Bekasi
+          - text: Depok
+            value: Depok
+          - text: Tangerang
+            value: Tangerang
     schema:
       name: city
       type: varchar

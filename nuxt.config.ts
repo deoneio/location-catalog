@@ -1,9 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
 const useMock = process.env.USE_MOCK === 'true';
+// Build/cache dirs are kept outside the OneDrive-synced project folder to avoid
+// EPERM/rmdir errors from OneDrive locking files while Nuxt/Vite rewrite them.
+const localCacheDir = join(tmpdir(), 'nuxt-build-cache', 'location-catalog');
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  buildDir: join(localCacheDir, '.nuxt'),
+  vite: {
+    cacheDir: join(localCacheDir, 'vite')
+  },
   css: ['~/assets/css/main.css'],
   app: {
     head: {
