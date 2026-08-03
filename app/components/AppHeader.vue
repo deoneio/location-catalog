@@ -90,9 +90,11 @@ const { siteName, navLinks, isMenuOpen, isScrolled, toggleMenu, closeMenu } = us
 
 .nav-link {
   position: relative;
+  display: inline-block;
+  padding: 0.4rem 0.85rem;
   font-weight: 500;
   color: var(--color-text-muted);
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), background-color var(--transition-fast);
 }
 
 .nav-link::after {
@@ -100,7 +102,7 @@ const { siteName, navLinks, isMenuOpen, isScrolled, toggleMenu, closeMenu } = us
   position: absolute;
   left: 0;
   right: 100%;
-  bottom: -4px;
+  bottom: 0;
   height: 2px;
   background: var(--color-accent);
   transition: right var(--transition-base);
@@ -111,6 +113,20 @@ const { siteName, navLinks, isMenuOpen, isScrolled, toggleMenu, closeMenu } = us
 }
 
 .nav-link:hover::after {
+  right: 0;
+}
+
+.nav-link.router-link-exact-active {
+  color: var(--color-accent);
+  background-color: color-mix(in srgb, var(--color-accent) 9%, transparent);
+  border-radius: var(--radius-sm);
+}
+
+.nav-link.router-link-exact-active:hover {
+  color: var(--color-accent);
+}
+
+.nav-link.router-link-exact-active::after {
   right: 0;
 }
 
