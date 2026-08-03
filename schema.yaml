@@ -311,13 +311,17 @@ fields:
       type: varchar
       max_length: 255
   - collection: testimonials
-    field: feedback
-    type: text
+    field: youtube_url
+    type: string
     meta:
-      interface: input-wysiwyg
+      interface: input
+      note: 'YouTube video URL (e.g. https://www.youtube.com/watch?v=...)'
+      required: true
     schema:
-      name: feedback
-      type: text
+      name: youtube_url
+      type: varchar
+      max_length: 255
+      is_nullable: false
   - collection: testimonials
     field: location_id
     type: uuid
@@ -410,6 +414,16 @@ fields:
     schema:
       name: value_proposition
       type: text
+  - collection: homepage_config
+    field: why_choose_us_video_url
+    type: string
+    meta:
+      interface: input
+      note: 'YouTube video URL for the Why Choose Us section'
+    schema:
+      name: why_choose_us_video_url
+      type: varchar
+      max_length: 255
   - collection: homepage_config
     field: seo_title
     type: string

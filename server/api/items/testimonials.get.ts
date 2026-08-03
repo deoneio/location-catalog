@@ -17,7 +17,7 @@ export default defineEventHandler((event) => {
         status: 'published',
         client_name: 'Jane Doe',
         company: 'Bright Frame Productions',
-        feedback: 'ShareLoc made finding the perfect industrial space so easy! The booking process was seamless.',
+        youtube_url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         location_id: 1,
         bts_photos: ['mock-image-id-bts-1', 'mock-image-id-bts-2']
       },
@@ -26,7 +26,7 @@ export default defineEventHandler((event) => {
         status: 'published',
         client_name: 'John Smith',
         company: 'Smith Visuals',
-        feedback: 'I use ShareLoc for all my client shoots now. The variety of aesthetic styles available is unmatched.',
+        youtube_url: 'https://www.youtube.com/watch?v=9bZkp7q19f0',
         location_id: 2,
         bts_photos: ['mock-image-id-bts-3']
       },
@@ -35,9 +35,18 @@ export default defineEventHandler((event) => {
         status: 'published',
         client_name: 'Alice Johnson',
         company: 'Johnson Events Co.',
-        feedback: 'Great spaces, and the team was incredibly responsive throughout our event planning process.',
+        youtube_url: 'https://www.youtube.com/watch?v=jNQXAC9IVRw',
         location_id: 3,
         bts_photos: []
+      },
+      {
+        id: 4,
+        status: 'published',
+        client_name: 'Marco Rossi',
+        company: 'Rossi Film Collective',
+        youtube_url: 'https://www.youtube.com/watch?v=aqz-KE-bpKQ',
+        location_id: 4,
+        bts_photos: ['mock-image-id-bts-4', 'mock-image-id-bts-5', 'mock-image-id-bts-6']
       }
     ]
   };
