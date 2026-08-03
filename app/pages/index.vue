@@ -134,14 +134,12 @@ const {
 }
 
 .hero-content h1 {
-  font-family: var(--font-heading);
   font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
   letter-spacing: 0.02em;
   color: hsla(30, 25%, 98%, 1);
 }
 
 .hero-content p {
-  font-family: var(--font-body);
   color: hsla(30, 15%, 96%, 0.85);
   font-size: 1.1rem;
   margin: 1rem 0 0;
