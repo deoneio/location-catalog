@@ -47,19 +47,19 @@
       </div>
     </section>
 
+    <section v-if="heroConfig?.why_choose_us_video_url" class="value-proposition">
+      <div class="value-proposition-heading page-container" v-reveal>
+        <h2>Why Choose Us</h2>
+      </div>
+      <YoutubeEmbed :url="heroConfig.why_choose_us_video_url" class="value-proposition-video" />
+    </section>
+
     <section class="featured page-container">
       <h2 v-reveal>Featured Locations</h2>
       <div class="featured-grid">
         <LocationCard v-for="location in featuredLocations" :key="location.id" :location="location" />
       </div>
       <p v-if="!featuredLocations.length" class="empty-state">No featured locations yet.</p>
-    </section>
-
-    <section v-if="heroConfig?.why_choose_us_video_url" class="value-proposition page-container">
-      <div class="value-proposition-panel glass-panel" v-reveal>
-        <h2>Why Choose Us</h2>
-        <YoutubeEmbed :url="heroConfig.why_choose_us_video_url" />
-      </div>
     </section>
   </div>
 </template>
@@ -248,12 +248,18 @@ const {
   margin-top: 1.5rem;
 }
 
-.value-proposition-panel {
-  padding: 2.5rem;
+.value-proposition {
+  background: var(--color-bg-alt);
+  padding-bottom: var(--space-10);
 }
 
-.value-proposition-panel h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
+.value-proposition-heading h2 {
+  font-size: var(--text-3xl);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+:deep(.value-proposition-video) {
+  border-radius: 0;
 }
 </style>
