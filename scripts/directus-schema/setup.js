@@ -64,7 +64,7 @@ async function setupSchema() {
     console.log('\n--- Creating Fields for Testimonials ---');
     const testimonialFields = [
       { field: 'status', type: 'string', meta: { interface: 'select-dropdown', options: { choices: [{ text: 'Published', value: 'published' }, { text: 'Draft', value: 'draft' }, { text: 'Archived', value: 'archived' }] } }, schema: { default_value: 'draft' } },
-      { field: 'client_name', type: 'string', meta: { interface: 'input' } },
+      { field: 'client_name', type: 'string', meta: { interface: 'input', required: true } },
       { field: 'company', type: 'string', meta: { interface: 'input' } },
       { field: 'youtube_url', type: 'string', meta: { interface: 'input', note: 'YouTube video URL (e.g. https://www.youtube.com/watch?v=...)', required: true } },
       { field: 'location_id', type: 'uuid', meta: { interface: 'select-dropdown-m2o' } }

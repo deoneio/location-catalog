@@ -297,10 +297,12 @@ fields:
     type: string
     meta:
       interface: input
+      required: true
     schema:
       name: client_name
       type: varchar
       max_length: 255
+      is_nullable: false
   - collection: testimonials
     field: company
     type: string
