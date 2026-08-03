@@ -12,8 +12,7 @@
 
         <form class="hero-search" @submit.prevent="submitSearch">
           <label>
-            City
-            <select v-model="searchCity">
+            <select v-model="searchCity" aria-label="City">
               <option value="">All cities</option>
               <option v-for="city in cityOptions" :key="city" :value="city">{{ city }}</option>
             </select>
@@ -31,7 +30,7 @@
 
           <div class="hero-search-filter">
             <MultiSelectFilter
-              label="House Type"
+              label="Location Type"
               :options="houseTypeOptions"
               :selected="searchHouseTypes"
               @toggle="toggleSearchHouseType"
@@ -48,19 +47,19 @@
       </div>
     </section>
 
+    <section v-if="heroConfig?.why_choose_us_video_url" class="value-proposition">
+      <div class="value-proposition-heading page-container" v-reveal>
+        <h2>Why Choose Us</h2>
+      </div>
+      <YoutubeEmbed :url="heroConfig.why_choose_us_video_url" class="value-proposition-video" />
+    </section>
+
     <section class="featured page-container">
       <h2 v-reveal>Featured Locations</h2>
       <div class="featured-grid">
         <LocationCard v-for="location in featuredLocations" :key="location.id" :location="location" />
       </div>
       <p v-if="!featuredLocations.length" class="empty-state">No featured locations yet.</p>
-    </section>
-
-    <section v-if="heroConfig?.value_proposition" class="value-proposition page-container">
-      <div class="value-proposition-panel glass-panel" v-reveal>
-        <h2>Why Choose Us</h2>
-        <div v-html="heroConfig.value_proposition" />
-      </div>
     </section>
   </div>
 </template>
@@ -135,14 +134,12 @@ const {
 }
 
 .hero-content h1 {
-  font-family: var(--font-heading);
   font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
   letter-spacing: 0.02em;
   color: hsla(30, 25%, 98%, 1);
 }
 
 .hero-content p {
-  font-family: var(--font-body);
   color: hsla(30, 15%, 96%, 0.85);
   font-size: 1.1rem;
   margin: 1rem 0 0;
@@ -249,12 +246,18 @@ const {
   margin-top: 1.5rem;
 }
 
-.value-proposition-panel {
-  padding: 2.5rem;
+.value-proposition {
+  background: var(--color-bg-alt);
+  padding-bottom: var(--space-10);
 }
 
-.value-proposition-panel h2 {
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
+.value-proposition-heading h2 {
+  font-size: var(--text-3xl);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+:deep(.value-proposition-video) {
+  border-radius: 0;
 }
 </style>

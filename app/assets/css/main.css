@@ -1,3 +1,43 @@
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('/fonts/Nunito-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-bg: #faf7f2;
   --color-surface: hsl(36, 33%, 98%);
@@ -8,10 +48,11 @@
   --color-accent: #b8895f;
   --color-accent-contrast: #2b2724;
   --color-border: hsl(35, 15%, 88%);
+  --color-bg-alt: hsl(30, 35%, 94%);
   --color-whatsapp: hsl(142, 70%, 42%);
 
-  --font-heading: 'Fraunces', 'Playfair Display', serif;
-  --font-body: 'Manrope', 'Inter', sans-serif;
+  --font-heading: 'Nunito', sans-serif;
+  --font-body: 'Nunito', sans-serif;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;

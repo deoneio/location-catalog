@@ -64,9 +64,9 @@ async function setupSchema() {
     console.log('\n--- Creating Fields for Testimonials ---');
     const testimonialFields = [
       { field: 'status', type: 'string', meta: { interface: 'select-dropdown', options: { choices: [{ text: 'Published', value: 'published' }, { text: 'Draft', value: 'draft' }, { text: 'Archived', value: 'archived' }] } }, schema: { default_value: 'draft' } },
-      { field: 'client_name', type: 'string', meta: { interface: 'input' } },
+      { field: 'client_name', type: 'string', meta: { interface: 'input', required: true } },
       { field: 'company', type: 'string', meta: { interface: 'input' } },
-      { field: 'feedback', type: 'text', meta: { interface: 'input-wysiwyg' } },
+      { field: 'youtube_url', type: 'string', meta: { interface: 'input', note: 'YouTube video URL (e.g. https://www.youtube.com/watch?v=...)', required: true } },
       { field: 'location_id', type: 'uuid', meta: { interface: 'select-dropdown-m2o' } }
     ];
 
@@ -80,6 +80,7 @@ async function setupSchema() {
       { field: 'hero_media', type: 'uuid', meta: { interface: 'file-image' } },
       { field: 'hero_cta_text', type: 'string', meta: { interface: 'input' } },
       { field: 'value_proposition', type: 'text', meta: { interface: 'input-wysiwyg' } },
+      { field: 'why_choose_us_video_url', type: 'string', meta: { interface: 'input', note: 'YouTube video URL for the Why Choose Us section' } },
       { field: 'seo_title', type: 'string', meta: { interface: 'input' } },
       { field: 'seo_description', type: 'text', meta: { interface: 'input-multiline' } },
       { field: 'seo_image', type: 'uuid', meta: { interface: 'file-image' } },

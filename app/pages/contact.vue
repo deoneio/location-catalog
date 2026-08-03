@@ -1,6 +1,11 @@
 <template>
-  <div class="contact-page page-container">
-    <div class="contact-panel glass-panel" v-reveal>
+  <section class="contact-hero">
+    <div class="contact-hero-media">
+      <img src="/images/contact-us.jpg" alt="A ShareLoc shoot location" />
+      <div class="contact-hero-overlay" />
+    </div>
+
+    <div class="contact-hero-content" v-reveal>
       <h1>Contact Us</h1>
       <p>Have a location in mind, or want to inquire? Reach out directly via WhatsApp, or use the details below.</p>
 
@@ -49,7 +54,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
@@ -59,17 +64,56 @@ const { contactEmail, contactPhone, contactAddress, whatsappLink } = useContactP
 </script>
 
 <style scoped>
-.contact-panel {
-  max-width: 560px;
-  padding: 2.5rem;
+.contact-hero {
+  position: relative;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
-.contact-panel h1 {
-  font-size: 2rem;
+.contact-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.contact-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contact-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--color-primary) 0%, transparent 65%);
+}
+
+.contact-hero-content {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 3.5rem;
+  color: hsla(30, 20%, 97%, 0.95);
+}
+
+.contact-hero-content h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+  color: hsla(30, 25%, 98%, 1);
+}
+
+.contact-hero-content p {
+  color: hsla(30, 15%, 96%, 0.85);
+  font-size: 1.1rem;
+  margin: 1rem 0 0;
+  max-width: 46ch;
 }
 
 .whatsapp-cta {
-  margin: 1.5rem 0 2rem;
+  margin: 1.75rem 0 2.25rem;
 }
 
 .contact-details {
@@ -92,8 +136,8 @@ const { contactEmail, contactPhone, contactAddress, whatsappLink } = useContactP
   height: 44px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: hsla(32, 85%, 55%, 0.12);
-  color: var(--color-accent);
+  background: hsla(36, 30%, 97%, 0.15);
+  color: hsl(32, 70%, 70%);
 }
 
 .icon svg {
@@ -108,6 +152,28 @@ const { contactEmail, contactPhone, contactAddress, whatsappLink } = useContactP
 
 .detail .label {
   font-size: 0.8rem;
-  color: var(--color-text-muted);
+  color: hsla(30, 15%, 96%, 0.6);
+}
+
+@media (max-width: 640px) {
+  .contact-hero {
+    min-height: auto;
+  }
+
+  .contact-hero-content {
+    padding: 3rem 1.25rem 2.5rem;
+  }
+
+  .contact-hero-content h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .contact-hero-content p {
+    font-size: 1rem;
+  }
+
+  .contact-details {
+    gap: 1rem;
+  }
 }
 </style>

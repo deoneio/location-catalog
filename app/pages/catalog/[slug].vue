@@ -169,25 +169,6 @@ const {
 
 <style scoped>
 /* Mobile-first: gallery then info stack in document order, unchanged. */
-@media (min-width: 1024px) {
-  .detail-layout {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: var(--space-10);
-    align-items: start;
-  }
-
-  .gallery {
-    /* Clears the sticky site header (~4rem tall) while pinned. */
-    position: sticky;
-    top: 5rem;
-  }
-
-  .info {
-    margin-top: 0;
-  }
-}
-
 .gallery-main {
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-lg);
@@ -199,6 +180,7 @@ const {
 .gallery-main .image-placeholder {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   object-fit: cover;
   transition: opacity var(--transition-base);
 }
@@ -235,6 +217,7 @@ const {
 .gallery-thumb .image-placeholder {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   object-fit: cover;
 }
 
@@ -244,6 +227,23 @@ const {
 
 .info h1 {
   font-size: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .detail-layout {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-10);
+    align-items: start;
+  }
+
+  .gallery {
+    min-width: 0;
+  }
+
+  .info {
+    margin-top: 0;
+  }
 }
 
 .house-type-pills {
