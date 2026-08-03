@@ -181,6 +181,7 @@ const {
     /* Clears the sticky site header (~4rem tall) while pinned. */
     position: sticky;
     top: 5rem;
+    min-width: 0;
   }
 
   .info {
@@ -199,6 +200,7 @@ const {
 .gallery-main .image-placeholder {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   object-fit: cover;
   transition: opacity var(--transition-base);
 }
@@ -235,6 +237,7 @@ const {
 .gallery-thumb .image-placeholder {
   width: 100%;
   height: 100%;
+  max-width: 100%;
   object-fit: cover;
 }
 

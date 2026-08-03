@@ -4,8 +4,7 @@
 
     <form class="filters glass-panel" @submit.prevent>
       <div class="filter-group">
-        <span>City</span>
-        <select v-model="selectedCity">
+        <select v-model="selectedCity" aria-label="City">
           <option value="">All cities</option>
           <option v-for="city in cityOptions" :key="city" :value="city">{{ city }}</option>
         </select>
@@ -20,7 +19,7 @@
       />
 
       <MultiSelectFilter
-        label="House Type"
+        label="Location Type"
         :options="houseTypeOptions"
         :selected="selectedHouseTypes"
         @toggle="toggleHouseType"

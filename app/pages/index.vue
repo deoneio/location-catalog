@@ -12,8 +12,7 @@
 
         <form class="hero-search" @submit.prevent="submitSearch">
           <label>
-            City
-            <select v-model="searchCity">
+            <select v-model="searchCity" aria-label="City">
               <option value="">All cities</option>
               <option v-for="city in cityOptions" :key="city" :value="city">{{ city }}</option>
             </select>
@@ -31,7 +30,7 @@
 
           <div class="hero-search-filter">
             <MultiSelectFilter
-              label="House Type"
+              label="Location Type"
               :options="houseTypeOptions"
               :selected="searchHouseTypes"
               @toggle="toggleSearchHouseType"
@@ -56,10 +55,10 @@
       <p v-if="!featuredLocations.length" class="empty-state">No featured locations yet.</p>
     </section>
 
-    <section v-if="heroConfig?.value_proposition" class="value-proposition page-container">
+    <section v-if="heroConfig?.why_choose_us_video_url" class="value-proposition page-container">
       <div class="value-proposition-panel glass-panel" v-reveal>
         <h2>Why Choose Us</h2>
-        <div v-html="heroConfig.value_proposition" />
+        <YoutubeEmbed :url="heroConfig.why_choose_us_video_url" />
       </div>
     </section>
   </div>
