@@ -17,7 +17,9 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   app: {
     head: {
-      htmlAttrs: { lang: 'en' }
+      htmlAttrs: { lang: 'en' },
+      title: 'ShareLoc - Premium Location Catalog',
+      titleTemplate: '%s - ShareLoc'
     },
     pageTransition: { name: 'page', mode: 'out-in' }
   },

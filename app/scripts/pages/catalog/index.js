@@ -4,6 +4,13 @@ export function useCatalogPage() {
 
   const locations = computed(() => locationsResponse.value?.data ?? [])
 
+  useSeoMeta({
+    title: 'Explore Location Catalog',
+    description: 'Browse through our curated collection of shoot locations, photo studios, video sets, and event spaces.',
+    ogTitle: 'Location Catalog - ShareLoc',
+    ogDescription: 'Browse through our curated collection of shoot locations, photo studios, video sets, and event spaces.'
+  })
+
   const categoryOptions = computed(() => {
     const categories = new Set(locations.value.flatMap((location) => location.categories || []))
     return Array.from(categories)

@@ -11,6 +11,25 @@ export function useCatalogDetailPage() {
 
   const location = computed(() => response.value?.data?.[0] ?? null)
 
+  useSeoMeta({
+    title: () => location.value?.seo_title || location.value?.name || 'Location Details',
+    description: () => {
+      if (location.value?.seo_description) return location.value.seo_description
+      if (location.value?.description) {
+        return location.value.description.replace(/<[^>]*>?/gm, '').slice(0, 160)
+      }
+      return 'Explore location details and inquiry options on ShareLoc.'
+    },
+    ogTitle: () => location.value?.seo_title || location.value?.name || 'Location Details',
+    ogDescription: () => location.value?.seo_description || (location.value?.description?.replace(/<[^>]*>?/gm, '').slice(0, 160)) || '',
+    ogImage: () => {
+      if (location.value?.seo_image) return useDirectusAsset(location.value.seo_image)
+      if (location.value?.thumbnail) return useDirectusAsset(location.value.thumbnail)
+      return null
+    },
+    twitterCard: 'summary_large_image'
+  })
+
   const galleryImages = computed(() => {
     if (!location.value) return []
     const rawGallery = location.value.gallery || []
