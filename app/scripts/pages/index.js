@@ -7,6 +7,18 @@ export function useIndexPage() {
   const heroTitle = computed(() => heroConfig.value?.hero_title || 'Find the Perfect Location for Your Next Shoot')
   const valueProposition = computed(() => heroConfig.value?.value_proposition || 'Premium spaces for photographers, videographers, and event planners.')
 
+  useSeoMeta({
+    title: () => heroConfig.value?.seo_title || 'Find the Perfect Location for Your Next Shoot',
+    description: () => heroConfig.value?.seo_description || valueProposition.value,
+    ogTitle: () => heroConfig.value?.seo_title || heroTitle.value,
+    ogDescription: () => heroConfig.value?.seo_description || valueProposition.value,
+    ogImage: () => {
+      if (heroConfig.value?.seo_image) return useDirectusAsset(heroConfig.value.seo_image)
+      return heroImageUrl.value || null
+    },
+    twitterCard: 'summary_large_image'
+  })
+
   const locations = computed(() => locationsResponse.value?.data ?? [])
 
   const featuredLocations = computed(() => locations.value.filter((location) => location.is_featured))
