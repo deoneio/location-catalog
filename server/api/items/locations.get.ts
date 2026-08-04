@@ -15,13 +15,13 @@ const mockLocations = [
     is_featured: true,
     thumbnail: 'mock-image-id-1',
     gallery: [
-      'mock-image-id-1-a',
-      'mock-image-id-1-b',
-      'mock-image-id-1-c',
-      'mock-image-id-1-d',
-      'mock-image-id-1-e',
-      'mock-image-id-1-f',
-      'mock-image-id-1-g',
+      { directus_files_id: { id: 'mock-image-id-1-a', filename_download: 'image_1.png' } },
+      { directus_files_id: { id: 'mock-image-id-1-b', filename_download: 'image_2.png' } },
+      { directus_files_id: { id: 'mock-image-id-1-c', filename_download: 'image_3.png' } },
+      { directus_files_id: { id: 'mock-image-id-1-d', filename_download: 'image_4.png' } },
+      { directus_files_id: { id: 'mock-image-id-1-e', filename_download: 'image_5.png' } },
+      { directus_files_id: { id: 'mock-image-id-1-f', filename_download: 'image_6.png' } },
+      { directus_files_id: { id: 'mock-image-id-1-g', filename_download: 'image_7.png' } },
     ],
     key_features: 'Exposed brick, High ceilings, Natural light',
     rules_restrictions: 'No smoking, No loud music after 10 PM',
@@ -40,7 +40,10 @@ const mockLocations = [
     city: 'Jakarta',
     is_featured: true,
     thumbnail: 'mock-image-id-2',
-    gallery: ['mock-image-id-2-a', 'mock-image-id-2-b'],
+    gallery: [
+      { directus_files_id: { id: 'mock-image-id-2-a', filename_download: 'image_8.png' } },
+      { directus_files_id: { id: 'mock-image-id-2-b', filename_download: 'image_9.png' } }
+    ],
     key_features: 'Outdoor seating, Lush greenery, Fairy lights',
     rules_restrictions: 'No pets allowed, Leave no trace',
     seo_title: 'Sunny Bohemian Garden - ShareLoc',
@@ -58,7 +61,9 @@ const mockLocations = [
     city: 'Jakarta',
     is_featured: false,
     thumbnail: 'mock-image-id-3',
-    gallery: ['mock-image-id-3-a'],
+    gallery: [
+      { directus_files_id: { id: 'mock-image-id-3-a', filename_download: 'image_10.png' } }
+    ],
     key_features: 'White backdrop, Designer furniture, City view',
     rules_restrictions: 'Shoe-free zone, No food/drinks on sofa',
     seo_title: 'Modern Minimalist Apartment - ShareLoc',

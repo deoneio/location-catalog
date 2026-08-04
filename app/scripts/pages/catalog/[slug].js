@@ -3,14 +3,30 @@ export function useCatalogDetailPage() {
   const config = useRuntimeConfig()
 
   const { data: response, pending } = useFetch('/api/items/locations', {
-    query: { 'filter[slug][_eq]': route.params.slug }
+    query: {
+      'filter[slug][_eq]': route.params.slug,
+      fields: '*,gallery.directus_files_id.id,gallery.directus_files_id.filename_download'
+    }
   })
 
   const location = computed(() => response.value?.data?.[0] ?? null)
 
   const galleryImages = computed(() => {
     if (!location.value) return []
-    const ids = [location.value.thumbnail, ...(location.value.gallery || [])].filter(Boolean)
+    const rawGallery = location.value.gallery || []
+    const galleryIds = rawGallery
+      .map((item) => {
+        if (typeof item === 'string') return item
+        if (item?.directus_files_id) {
+          return typeof item.directus_files_id === 'string'
+            ? item.directus_files_id
+            : item.directus_files_id.id
+        }
+        return item?.id || null
+      })
+      .filter(Boolean)
+
+    const ids = [location.value.thumbnail, ...galleryIds].filter(Boolean)
     return ids.map((id) => ({ id, url: useDirectusAsset(id) }))
   })
 
