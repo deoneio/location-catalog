@@ -1,7 +1,7 @@
 export function useContactPage() {
   const config = useRuntimeConfig()
 
-  const whatsappLink = `https://wa.me/${config.public.whatsappNumber}?text=${encodeURIComponent('Hi, I would like to inquire about a location.')}`
+  const whatsappLink = `https://wa.me/${config.public.whatsappNumber}?text=${encodeURIComponent('Hi MinLoc! Aku mau tanya-tanya dulu bisa?')}`
 
   useSeoMeta({
     title: 'Contact Us',

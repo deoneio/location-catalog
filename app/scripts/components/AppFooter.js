@@ -4,7 +4,7 @@ export function useAppFooter() {
   const siteName = config.public.siteName
   const contactEmail = config.public.contactEmail
   const contactPhone = config.public.contactPhone
-  const whatsappLink = `https://wa.me/${config.public.whatsappNumber}?text=${encodeURIComponent('Hi, I would like to inquire about a location.')}`
+  const whatsappLink = `https://wa.me/${config.public.whatsappNumber}?text=${encodeURIComponent('Hi MinLoc! Aku mau tanya-tanya dulu bisa?')}`
   const currentYear = new Date().getFullYear()
 
   const navLinks = [
