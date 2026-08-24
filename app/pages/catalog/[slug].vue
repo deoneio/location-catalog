@@ -55,12 +55,12 @@
         </div>
         <div class="description" v-html="location.description" />
 
-        <div class="details-grid">
-          <div class="details-block">
+        <div v-if="location.key_features || location.rules_restrictions" class="details-grid">
+          <div v-if="location.key_features" class="details-block">
             <h2>Highlight Spots</h2>
             <div v-html="location.key_features" />
           </div>
-          <div class="details-block">
+          <div v-if="location.rules_restrictions" class="details-block">
             <h2>Rules &amp; Restrictions</h2>
             <div v-html="location.rules_restrictions" />
           </div>
@@ -187,11 +187,18 @@ const {
 
 .gallery-thumbs {
   display: flex;
+  flex-wrap: nowrap;
   gap: 0.75rem;
   margin-top: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.25rem;
+  scrollbar-width: thin;
 }
 
 .gallery-thumb {
+  flex: 0 0 auto;
   width: 84px;
   height: 64px;
   padding: 0;

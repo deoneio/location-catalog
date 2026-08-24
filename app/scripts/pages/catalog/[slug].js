@@ -11,8 +11,24 @@ export function useCatalogDetailPage() {
 
   const location = computed(() => response.value?.data?.[0] ?? null)
 
+  const generatedTitle = computed(() => {
+    const loc = location.value
+    if (!loc) return null
+    const category = loc.categories?.[0]
+    const parts = [loc.name, category].filter(Boolean).join(' - ')
+    return loc.city ? `${parts} di ${loc.city} | Sewa lewat ShareLoc` : `${parts} | Sewa lewat ShareLoc`
+  })
+
+  // seo_title is CMS-authored as the complete meta title (editors write it in
+  // full); the generated fallback carries its own "| Sewa lewat ShareLoc"
+  // suffix. Either way it's already complete, so bypass the global
+  // titleTemplate ("%s - ShareLoc") to avoid double-appending it.
+  const pageTitle = computed(() => location.value?.seo_title || generatedTitle.value || 'Location Details - ShareLoc')
+
+  useHead({ titleTemplate: (title) => title })
+
   useSeoMeta({
-    title: () => location.value?.seo_title || location.value?.name || 'Location Details',
+    title: () => pageTitle.value,
     description: () => {
       if (location.value?.seo_description) return location.value.seo_description
       if (location.value?.description) {
@@ -20,7 +36,7 @@ export function useCatalogDetailPage() {
       }
       return 'Explore location details and inquiry options on ShareLoc.'
     },
-    ogTitle: () => location.value?.seo_title || location.value?.name || 'Location Details',
+    ogTitle: () => pageTitle.value,
     ogDescription: () => location.value?.seo_description || (location.value?.description?.replace(/<[^>]*>?/gm, '').slice(0, 160)) || '',
     ogImage: () => {
       if (location.value?.seo_image) return useDirectusAsset(location.value.seo_image)
