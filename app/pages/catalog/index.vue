@@ -88,6 +88,17 @@ h1 {
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
+.filters select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a8580' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  background-size: 0.7rem;
+}
+
 .filters select:focus,
 .filters input:focus {
   outline: none;
@@ -121,5 +132,16 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .filters {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .filter-group {
+    align-items: center;
+  }
 }
 </style>

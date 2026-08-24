@@ -5,10 +5,10 @@ export function useCatalogPage() {
   const locations = computed(() => locationsResponse.value?.data ?? [])
 
   useSeoMeta({
-    title: 'Explore Location Catalog',
-    description: 'Browse through our curated collection of shoot locations, photo studios, video sets, and event spaces.',
-    ogTitle: 'Location Catalog - ShareLoc',
-    ogDescription: 'Browse through our curated collection of shoot locations, photo studios, video sets, and event spaces.'
+    title: 'Katalog Lokasi Shoot & Event',
+    description: 'Jelajahi puluhan lokasi shoot di Jakarta & Bekasi: rumah nostalgic, cafe outdoor, hingga interior American classic. Filter by kota, kategori, dan tipe lokasi.',
+    ogTitle: 'Katalog Lokasi Shoot & Event - ShareLoc',
+    ogDescription: 'Jelajahi puluhan lokasi shoot di Jakarta & Bekasi: rumah nostalgic, cafe outdoor, hingga interior American classic. Filter by kota, kategori, dan tipe lokasi.'
   })
 
   const categoryOptions = computed(() => {

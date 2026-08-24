@@ -99,10 +99,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: var(--font-body);
   background-color: var(--color-bg);
   color: var(--color-text);

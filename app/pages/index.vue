@@ -192,6 +192,17 @@ const {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 25%, transparent);
 }
 
+.hero-search select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a8580' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-3) center;
+  background-size: 0.7rem;
+}
+
 .hero-search-submit {
   margin-left: var(--space-5);
   padding: var(--space-2) var(--space-4);
@@ -201,7 +212,18 @@ const {
 .hero-search-filter {
   display: flex;
   align-items: center;
+  flex: 1;
   padding: 0 var(--space-5);
+}
+
+.hero-search-filter :deep(.multi-select-filter) {
+  display: flex;
+  width: 100%;
+}
+
+.hero-search-filter :deep(.msf-trigger) {
+  width: 100%;
+  justify-content: space-between;
 }
 
 @media (max-width: 640px) {
