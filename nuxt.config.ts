@@ -41,7 +41,8 @@ export default defineNuxtConfig({
       directusUrl: process.env.DIRECTUS_URL || 'http://directus:8055',
       whatsappNumber: process.env.WHATSAPP_NUMBER || '6282388857931',
       contactEmail: process.env.CONTACT_EMAIL || 'sharelocspace@gmail.com',
-      contactPhone: process.env.CONTACT_PHONE || '+62 823-8885-7931'
+      contactPhone: process.env.CONTACT_PHONE || '+62 823-8885-7931',
+      gaMeasurementId: process.env.GA_MEASUREMENT_ID || ''
     }
   }
 })
