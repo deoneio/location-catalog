@@ -2,7 +2,7 @@
   <div class="home-page">
     <section class="hero">
       <div class="hero-media">
-        <img v-if="heroImageUrl" :src="heroImageUrl" alt="" />
+        <img v-if="heroImageUrl" :src="heroImageUrl" alt="ShareLoc Premium Location Catalog" />
         <div v-else class="image-placeholder" aria-hidden="true" />
         <div class="hero-overlay" />
       </div>
