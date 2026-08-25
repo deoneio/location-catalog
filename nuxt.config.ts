@@ -39,10 +39,9 @@ export default defineNuxtConfig({
       siteName: 'ShareLoc',
       useMock,
       directusUrl: process.env.DIRECTUS_URL || 'http://directus:8055',
-      whatsappNumber: process.env.WHATSAPP_NUMBER || '6281234567890',
-      contactEmail: process.env.CONTACT_EMAIL || 'hello@shareloc.example',
-      contactPhone: process.env.CONTACT_PHONE || '+62 812-3456-7890',
-      contactAddress: process.env.CONTACT_ADDRESS || 'Jl. Placeholder No. 123, Jakarta, Indonesia'
+      whatsappNumber: process.env.WHATSAPP_NUMBER || '6282388857931',
+      contactEmail: process.env.CONTACT_EMAIL || 'sharelocspace@gmail.com',
+      contactPhone: process.env.CONTACT_PHONE || '+62 823-8885-7931'
     }
   }
 })

@@ -47,10 +47,6 @@
               <circle cx="12" cy="9.5" r="2.3" />
             </svg>
           </span>
-          <span class="detail">
-            <span class="label">Address</span>
-            <span>{{ contactAddress }}</span>
-          </span>
         </li>
       </ul>
     </div>
@@ -60,7 +56,7 @@
 <script setup>
 import { useContactPage } from '~/scripts/pages/contact.js'
 
-const { contactEmail, contactPhone, contactAddress, whatsappLink } = useContactPage()
+const { contactEmail, contactPhone, whatsappLink } = useContactPage()
 </script>
 
 <style scoped>

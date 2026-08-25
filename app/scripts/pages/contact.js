@@ -13,7 +13,6 @@ export function useContactPage() {
   return {
     contactEmail: config.public.contactEmail,
     contactPhone: config.public.contactPhone,
-    contactAddress: config.public.contactAddress,
     whatsappLink
   }
 }
