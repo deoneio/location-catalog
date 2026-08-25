@@ -126,7 +126,7 @@ export function useCatalogDetailPage() {
 
   const whatsappLink = computed(() => {
     if (!location.value) return '#'
-    const message = `Hi, I'm interested in inquiring about "${location.value.name}". Is it available?`
+    const message = `Halo MinLoc, boleh tau lebih lanjut tentang "${location.value.name}"`
     return `https://wa.me/${config.public.whatsappNumber}?text=${encodeURIComponent(message)}`
   })
 

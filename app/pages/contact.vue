@@ -40,14 +40,6 @@
             <a :href="`tel:${contactPhone}`">{{ contactPhone }}</a>
           </span>
         </li>
-        <li>
-          <span class="icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-              <path d="M12 21s7-6.1 7-11.2A7 7 0 0 0 5 9.8C5 14.9 12 21 12 21Z" stroke-linejoin="round" />
-              <circle cx="12" cy="9.5" r="2.3" />
-            </svg>
-          </span>
-        </li>
       </ul>
     </div>
   </section>
