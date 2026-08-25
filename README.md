@@ -60,7 +60,9 @@ What gets sent, once enabled:
 - **Clicks** — every link/button click site-wide, via a single delegated listener; carries the element's text, `href`, and a `data-track-id` when clicking inside a location card (`app/plugins/gtag.client.ts`).
 - **Impressions** — a `location_impression` event the first time a location card scrolls into view, on both the catalog page and the homepage's featured section (`app/plugins/impression.ts`, applied via the `v-impression` directive in `app/components/LocationCard.vue`).
 
-When deploying with Docker Compose, set `GA_MEASUREMENT_ID` in your shell or `.env` before running `docker compose up` — it's passed through to the `nuxt` service in `docker-compose.yml`.
+**Deploying with the prebuilt Docker image** (`docker compose up`, e.g. `ghcr.io/deoneio/location-catalog:test` built by CI): set `GA_MEASUREMENT_ID` in your shell or `.env` before starting the stack — `docker-compose.yml` passes it into the container as `NUXT_PUBLIC_GA_MEASUREMENT_ID`, which is the only form of this variable Nuxt re-reads *after* the image has already been built. Changing it just needs a container restart (`docker compose up -d`), not an image rebuild.
+
+If you instead run `npm run build` yourself (no Docker), plain `GA_MEASUREMENT_ID` in `.env` is read directly at build time — no `NUXT_PUBLIC_` prefix needed in that case.
 
 ## Setup
 

@@ -23,7 +23,11 @@ services:
       - HOST=0.0.0.0
       - USE_MOCK=false
       - DIRECTUS_URL=http://directus:8055
-      - GA_MEASUREMENT_ID=${GA_MEASUREMENT_ID:-}
+      # Nuxt only picks up runtimeConfig.public overrides after the image is
+      # already built via the NUXT_PUBLIC_<KEY> env convention (gaMeasurementId
+      # -> NUXT_PUBLIC_GA_MEASUREMENT_ID) — plain GA_MEASUREMENT_ID is only read
+      # at build time (see nuxt.config.ts), so it has no effect here.
+      - NUXT_PUBLIC_GA_MEASUREMENT_ID=${GA_MEASUREMENT_ID:-}
     networks:
       - shareloc-network
     depends_on:
