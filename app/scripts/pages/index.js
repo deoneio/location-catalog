@@ -14,7 +14,7 @@ export function useIndexPage() {
     ogDescription: () => heroConfig.value?.seo_description || valueProposition.value,
     ogImage: () => {
       if (heroConfig.value?.seo_image) return useDirectusAsset(heroConfig.value.seo_image)
-      return heroImageUrl.value || null
+      return '/images/logo.png'
     },
     twitterCard: 'summary_large_image'
   })
