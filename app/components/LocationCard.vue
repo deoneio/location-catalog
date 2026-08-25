@@ -1,5 +1,11 @@
 <template>
-  <NuxtLink :to="`/catalog/${location.slug}`" class="location-card" v-reveal>
+  <NuxtLink
+    :to="`/catalog/${location.slug}`"
+    class="location-card"
+    v-reveal
+    v-impression="{ id: location.id, name: location.name }"
+    :data-track-id="location.id"
+  >
     <div class="location-card-image">
       <img v-if="thumbnailUrl" :src="thumbnailUrl" :alt="location.name" />
       <div v-else class="image-placeholder" aria-hidden="true" />

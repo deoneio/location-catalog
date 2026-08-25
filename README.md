@@ -44,6 +44,24 @@ To connect to your real Directus instance, update your `.env` file:
 
 When `USE_MOCK` is disabled, Nuxt will automatically proxy all `/api/**` requests to your Directus instance.
 
+## Google Analytics
+
+The site can report page views, clicks, and location-card impressions to Google Analytics 4.
+
+1. Create a GA4 property and copy its **Measurement ID** (`G-XXXXXXX`) from **Admin → Data Streams → your web stream**.
+2. Set it in `.env`:
+   ```bash
+   GA_MEASUREMENT_ID=G-XXXXXXX
+   ```
+3. Tracking only loads when running in production (`NODE_ENV=production`) **and** `GA_MEASUREMENT_ID` is set — local `npm run dev` and mock-data sessions are never tracked, so they won't pollute your analytics data. Leave the variable blank to disable tracking entirely.
+
+What gets sent, once enabled:
+- **Page views** — on initial load and every client-side route change (`app/plugins/gtag.client.ts`).
+- **Clicks** — every link/button click site-wide, via a single delegated listener; carries the element's text, `href`, and a `data-track-id` when clicking inside a location card (`app/plugins/gtag.client.ts`).
+- **Impressions** — a `location_impression` event the first time a location card scrolls into view, on both the catalog page and the homepage's featured section (`app/plugins/impression.ts`, applied via the `v-impression` directive in `app/components/LocationCard.vue`).
+
+When deploying with Docker Compose, set `GA_MEASUREMENT_ID` in your shell or `.env` before running `docker compose up` — it's passed through to the `nuxt` service in `docker-compose.yml`.
+
 ## Setup
 
 Make sure to install dependencies:
