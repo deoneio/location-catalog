@@ -1,7 +1,7 @@
 declare global {
   interface Window {
     dataLayer: unknown[]
-    gtag: (...args: unknown[]) => void
+    gtag: (...args: unknown[]) => void // called with real args; internally forwards `arguments`, not a spread array
   }
 }
 
@@ -15,12 +15,17 @@ export default defineNuxtPlugin((nuxtApp) => {
   if (!import.meta.env.PROD || !gaMeasurementId) return
 
   window.dataLayer = window.dataLayer || []
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer.push(args)
+  // Must push the raw `arguments` object here, matching Google's own gtag.js
+  // snippet exactly. Spreading it into a real array first (`...args`) looks
+  // equivalent but silently breaks gtag.js's internal command processing —
+  // it queues fine locally but never actually dispatches anything to GA4.
+  window.gtag = function gtag() {
+    window.dataLayer.push(arguments)
   }
-  // The GA4 property has Consent Mode configured; without an explicit default,
-  // Google's tags assume consent has NOT been granted and silently drop every
-  // hit. This site has no cookie-consent banner and only needs analytics.
+  // The GA4 property also has Consent Mode configured; without an explicit
+  // default, Google's tags fall back to an unconsented "cookieless ping"
+  // that GA4 only partially models. This site has no cookie-consent banner
+  // and only needs analytics, so grant it outright.
   window.gtag('consent', 'default', {
     ad_storage: 'denied',
     ad_user_data: 'denied',
