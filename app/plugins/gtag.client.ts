@@ -18,6 +18,15 @@ export default defineNuxtPlugin((nuxtApp) => {
   window.gtag = function gtag(...args: unknown[]) {
     window.dataLayer.push(args)
   }
+  // The GA4 property has Consent Mode configured; without an explicit default,
+  // Google's tags assume consent has NOT been granted and silently drop every
+  // hit. This site has no cookie-consent banner and only needs analytics.
+  window.gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: 'granted'
+  })
   window.gtag('js', new Date())
   window.gtag('config', gaMeasurementId, { send_page_view: false })
 
