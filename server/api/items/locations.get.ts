@@ -13,6 +13,8 @@ const mockLocations = [
     categories: ['Commercial', 'Drama'],
     city: 'Jakarta',
     is_featured: true,
+    youtube_url: 'https://www.youtube.com/watch?v=ScMzIvxBSi4',
+    video_thumbnail: null,
     thumbnail: 'mock-image-id-1',
     gallery: [
       { directus_files_id: { id: 'mock-image-id-1-a', filename_download: 'image_1.png' } },

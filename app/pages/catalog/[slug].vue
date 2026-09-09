@@ -36,6 +36,12 @@
           </svg>
           View all photos ({{ galleryImages.length }})
         </button>
+
+        <LocationVideo
+          v-if="location.youtube_url"
+          :url="location.youtube_url"
+          :poster="videoPosterUrl"
+        />
       </section>
 
       <section class="info" v-reveal>
@@ -150,6 +156,7 @@ import { useCatalogDetailPage } from '~/scripts/pages/catalog/[slug].js'
 const {
   pending,
   location,
+  videoPosterUrl,
   galleryImages,
   activeImageIndex,
   activeImage,

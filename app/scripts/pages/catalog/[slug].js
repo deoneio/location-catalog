@@ -65,6 +65,10 @@ export function useCatalogDetailPage() {
     return ids.map((id) => ({ id, url: useDirectusAsset(id) }))
   })
 
+  // CMS-set poster for the location video; the component falls back to the
+  // YouTube thumbnail when this is empty.
+  const videoPosterUrl = computed(() => useDirectusAsset(location.value?.video_thumbnail))
+
   const activeImageIndex = ref(0)
   const activeImage = computed(() => galleryImages.value[activeImageIndex.value] ?? null)
 
@@ -133,6 +137,7 @@ export function useCatalogDetailPage() {
   return {
     pending,
     location,
+    videoPosterUrl,
     galleryImages,
     activeImageIndex,
     activeImage,
